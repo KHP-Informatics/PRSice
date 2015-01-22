@@ -32,7 +32,10 @@ The first two figures are based on a PRSice run over PGC Schizophrenia and RADIA
 
 ## Get me the Docker Version
 
-Intsall docker then:-  
+**Intsall docker**  
+
+Windows: https://docs.docker.com/installation/windows/  
+Mac: https://docs.docker.com/installation/mac/  
 
 ```
 docker pull compbio/prsice:1.1
