@@ -77,7 +77,7 @@ docker pull compbio/prsice:1.1
 
 
 
-## Runnng PRSice
+## Runnig PRSice
 
 **Plink Versions**
 The following PLINK executables are provided and installed in the docker images at :-  
@@ -119,7 +119,7 @@ http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environme
 
 **********************************
 
-### Contach Info
+### Contact Info
  
 Stephen J Newhouse (PhD)  
 Senior Bioinformatician  
