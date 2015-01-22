@@ -118,6 +118,8 @@ docker run \
 http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environment.html  
 
 **********************************
+
+### Contach Info
  
 Stephen J Newhouse (PhD)  
 Senior Bioinformatician  
@@ -141,9 +143,7 @@ web: http://core.brc.iop.kcl.ac.uk/
 web: http://compbio.brc.iop.kcl.ac.uk/  
 web: http://www.slam.nhs.uk/brc/  
 
-Google is your Friend: https://www.google.co.uk/  
-
-uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
+linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
 
 Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
 
