@@ -10,7 +10,7 @@ PRSice
 *********************
 
 ### PRSice: Dockerised for your polygenic pleasure!
-Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or Mac or Linux box....  
+Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or Mac or Linux box.  
 _Why?_ ... So you can run it on any system!!!
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
