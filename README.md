@@ -77,7 +77,7 @@ docker run \
   --name prsice \
   compbio/prsice:1.1 /bin/bash -c 
     "R \
-    --file=PRSice_v1.1.R \
+    --file=/usr/local/bin/PRSice_v1.1.R \
     -q \
     --args 
     plink /usr/local/bin/plink1.9_x86_64 \
@@ -89,6 +89,7 @@ docker run \
     binary.target F"
 ```
 
+See user manual for details on running PRSice: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)
 
 
 
