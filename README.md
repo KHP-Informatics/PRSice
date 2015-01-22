@@ -101,7 +101,9 @@ Make sure you use the right binary for your system eg 64bit vx 32bit!
 
 **Running PRSice on a 64bit machine (x86_64)**
 
-See user manual for details on running PRSice: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)
+See user docs or details on running PRSice:  
+The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
+The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
 
 ```
 docker run \
