@@ -1,15 +1,16 @@
-# PRSice (Dockerised)
+PRSice
+============
 
 **Software:** PRSice (pronounced 'precise') a software package for calculating, applying, evaluating and plotting the results of polygenic risk scores  
-
 **Version:** 1.1  
 **Authors:** Jack Euesden <jack.euesden@kcl.ac.uk>, Cathryn M. Lewis and Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
 **Publised in [Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)**
+*********************
+
+### PRSice: Dockerised for your polygenic pleasure!
+Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or Mac or Linux box. 
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
-
-### PRSice Dockerised for your polygenic pleasure!
-Here we provide a Docker image of PRSice v1.1, for you to run on your Windows/Mac/Linux box. 
 
 *********************
 
