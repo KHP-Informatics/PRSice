@@ -52,3 +52,47 @@ docker load < precise.tar
 ```
 
 ## Runnng PRSice
+
+**Plink Versions**
+The following PLINK executables are provided and installed in the docker images at :-  
+
+- /usr/local/bin/plink1.7_i686  
+- /usr/local/bin/plink1.7_x86_64  
+- /usr/local/bin/plink1.9_i686  
+- /usr/local/bin/plink1.9_x86_64  
+
+Make sure you use the right binary for your system eg 64bit vx 32bit!
+
+**Running PRSice on a 64bit machine (x86_64)**
+
+```
+docker run \
+  --rm \
+  -it \
+  -v ${HOME}/pgrs:/home/pipeman: \
+  -w /home/pipeman \
+  -e HOME=/home/pipeman \
+  -e USER=pipeman \
+  --user pipeman \
+  --name prsice \
+  compbio/prsice:1.1 /bin/bash -c 
+    "R \
+    --file=PRSice_v1.1.R \
+    -q \
+    --args 
+    plink /usr/local/bin/plink1.9_x86_64 \
+    base /home/pipeman/TOY_BASE_GWAS.assoc \
+    target /home/pipeman/TOY_TARGET \
+    slower 0 \
+    sinc 0.01 \
+    supper 0.5 \
+    binary.target F"
+```
+
+
+
+
+
+
+
+
