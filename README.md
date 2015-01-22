@@ -21,8 +21,6 @@ Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or
 _Why?_ ... So you can run it on any system!!!
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
-email : stephen.newhouse@kcl.ac.uk  
-email : stephen.j.newhouse@gmail.com  
 
 github :https://github.com/KHP-Informatics  
 github: https://github.com/snewhouse  
