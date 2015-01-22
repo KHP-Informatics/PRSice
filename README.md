@@ -7,6 +7,9 @@ PRSice
 **Version:** 1.1  
 **Authors:** Jack Euesden <jack.euesden@kcl.ac.uk>, Cathryn M. Lewis and Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
 **Publised in [Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)**
+**Website:** http://PRSice.info  
+See user manual for details on running PRSice: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
+Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
 *********************
 
 ### PRSice: Dockerised for your polygenic pleasure!
@@ -75,8 +78,6 @@ docker pull compbio/prsice:1.1
 **Plink Versions**
 The following PLINK executables are provided and installed in the docker images at :-  
 
-- /usr/local/bin/plink1.7_i686  
-- /usr/local/bin/plink1.7_x86_64  
 - /usr/local/bin/plink1.9_i686  
 - /usr/local/bin/plink1.9_x86_64  
 
