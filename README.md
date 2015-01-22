@@ -1,9 +1,8 @@
 # PRSice
-PRSice (pronounced 'precise') is a software package for calculating, applying, evaluating and plotting the results of polygenic risk scores
 
-*********************
-
-Authors: Jack Euesden, Cathryn M. Lewis and Paul F. O'Reilly  
+Software: PRSice (pronounced 'precise') a software package for calculating, applying, evaluating and plotting the results of polygenic risk scores
+Version: 1.1  
+Authors: Jack Euesden <jack.euesden@kcl.ac.uk>, Cathryn M. Lewis and Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
 Dockered by : Stephen Newhouse <stepen.j.newhouse@gmail.com>  
 
 *********************
@@ -16,8 +15,26 @@ Publised in [Bioinformatics](http://bioinformatics.oxfordjournals.org/content/ea
 
 **Availability:** PRSice is written in R, including wrappers for bash data management scripts and PLINK-1.9 to minimise computational time. PRSice runs as a command-line program with a variety of user-options, and is freely available for download from http://PRSice.info
 
-**Contact:** jack.euesden@kcl.ac.uk; paul.oreilly@kcl.ac.uk
+*********************
 
-**URL**: http://prsice.info/
+## Example Output
+
+The first two figures are based on a PRSice run over PGC Schizophrenia and RADIANT-UK Major Depressive Disorder data, as shown in our paper, while the quantile plot is produced from simulated data.
+
+![fig1](/figs/PGC2_MANUSCRIPT_FIGURES_BARPLOT_2014-09-16-eps-converted-to.png)
+
+![fig2](/figs/PGC2_MANUSCRIPT_FIGURES_POINTPLOT_2014-09-16-eps-converted-to.png)
+
+![fig3](/figs/EXAMPLE_3_QUANTILES_1_QUANTILES_PLOT.png)
 
 *********************
+
+## Get me the Docker Version
+
+Intsall docker then:-  
+
+```
+docker pull compbio/prsice:1.1
+```
+
+## Runnng PRSice

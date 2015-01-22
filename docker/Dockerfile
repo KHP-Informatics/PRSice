@@ -57,7 +57,9 @@ RUN /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "htt
     
 ADD PRSice_v1.1.zip /usr/local/pipeline/
 
-RUN chmod -R 777 /usr/local/pipeline/ZIP_FOR_PRSICE_171214/* && \
+RUN cd /usr/local/pipeline/ && \
+    unzip PRSice_v1.1.zip && \
+    chmod -R 777 /usr/local/pipeline/ZIP_FOR_PRSICE_171214/* && \
     cp -v /usr/local/pipeline/ZIP_FOR_PRSICE_171214/* /usr/local/bin
 
 #-------------------------------PERMISSIONS--------------------------
