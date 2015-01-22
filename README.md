@@ -45,8 +45,14 @@ Mac: https://docs.docker.com/installation/mac/
 
 **Build from scratch**
 
+If on Windows or Mac then start **boot2docker**
+
+```
+## eg on Mac
+boot2docker start
 ```
 
+```
 git clone https://github.com/KHP-Informatics/PRSice.git
 
 cd PRSice/docker
@@ -103,7 +109,7 @@ docker run \
     binary.target F"
 ```
 
-
+http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environment.html  
 
 
 
