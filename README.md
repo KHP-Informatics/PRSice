@@ -21,6 +21,20 @@ Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or
 _Why?_ ... So you can run it on any system!!!
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
+email : stephen.newhouse@kcl.ac.uk  
+email : stephen.j.newhouse@gmail.com  
+
+github :https://github.com/KHP-Informatics  
+github: https://github.com/snewhouse  
+dockerhub: https://hub.docker.com/u/compbio/  
+
+web: http://core.brc.iop.kcl.ac.uk/  
+web: http://compbio.brc.iop.kcl.ac.uk/  
+web: http://www.slam.nhs.uk/brc/  
+
+linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
+
+Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
 
 *********************
 
@@ -118,34 +132,5 @@ docker run \
 http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environment.html  
 
 **********************************
-
-### Contact Info
- 
-Stephen J Newhouse (PhD)  
-Senior Bioinformatician  
-
-NIHR Biomedical Research Centre for Mental Health  
-South London and Maudsley NHS Foundation Trust&  
-Institute of Psychiatry, Psychology & Neuroscience (IoPPN),   
-Kings College London  
-Box P092  
-De Crespigny Park  
-London SE5 8AF  
-
-email : stephen.newhouse@kcl.ac.uk  
-email : stephen.j.newhouse@gmail.com  
-
-github :https://github.com/KHP-Informatics  
-github: https://github.com/snewhouse  
-dockerhub: https://hub.docker.com/u/compbio/  
-
-web: http://core.brc.iop.kcl.ac.uk/  
-web: http://compbio.brc.iop.kcl.ac.uk/  
-web: http://www.slam.nhs.uk/brc/  
-
-linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
-
-Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
-
 
 
