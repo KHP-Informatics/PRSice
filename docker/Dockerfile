@@ -48,19 +48,17 @@ RUN apt-get update -y && apt-get upgrade -y
 
 #---------------------------------PRSice-------------------------------------#
   
-  
 RUN /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("ggplot2",dependencies=TRUE)'  && \
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("plyr",dependencies=TRUE)'  && \
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("batch",dependencies=TRUE)'  && \
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("fsmb",dependencies=TRUE)'  && \
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("gtx",dependencies=TRUE)'
     
-ADD PRSice_v1.1.zip /usr/local/pipeline/
+ADD prsice_v1.1.tar.gz /usr/local/pipeline/
 
-RUN cd /usr/local/pipeline/ && \
-    unzip PRSice_v1.1.zip && \
-    chmod -R 777 /usr/local/pipeline/ZIP_FOR_PRSICE_171214/* && \
-    cp -v /usr/local/pipeline/ZIP_FOR_PRSICE_171214/* /usr/local/bin
+RUN cd /usr/local/pipeline/prsice_v1.1 && \
+    chmod -R 777 /usr/local/pipeline/prsice_v1.1* && \
+    cp -v /usr/local/pipeline/prsice_v1.1/* /usr/local/bin
 
 #-------------------------------PERMISSIONS--------------------------
 RUN chmod -R 777 /usr/local/pipeline
