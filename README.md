@@ -45,4 +45,10 @@ Mac: https://docs.docker.com/installation/mac/
 docker pull compbio/prsice:1.1
 ```
 
+**or** 
+
+```
+docker load < precise.tar
+```
+
 ## Runnng PRSice
