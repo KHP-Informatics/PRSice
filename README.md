@@ -43,15 +43,25 @@ The first two figures are based on a PRSice run over PGC Schizophrenia and RADIA
 Windows: https://docs.docker.com/installation/windows/  
 Mac: https://docs.docker.com/installation/mac/  
 
+**Build from scratch**
+
 ```
-docker pull compbio/prsice:1.1
+
+git clone https://github.com/KHP-Informatics/PRSice.git
+
+cd PRSice/docker
+
+docker build --rm=true -t compbio/prsice:1.1 .
+
 ```
 
 **or** 
 
 ```
-docker load < precise.tar
+docker pull compbio/prsice:1.1
 ```
+
+
 
 ## Runnng PRSice
 
