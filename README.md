@@ -8,9 +8,10 @@ PRSice
 **Authors:** Jack Euesden <jack.euesden@kcl.ac.uk>, Cathryn M. Lewis and Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
 **Publised in [Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)**  
 **Website:** http://PRSice.info  
-**Read the Docs**  
-Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
-Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
+**Read the Docs!**  
+The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
+The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
+
 *********************
 
 ### PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
@@ -114,9 +115,35 @@ docker run \
 
 http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environment.html  
 
+**********************************
+ 
+Stephen J Newhouse (PhD)  
+Senior Bioinformatician  
 
+NIHR Biomedical Research Centre for Mental Health  
+South London and Maudsley NHS Foundation Trust&  
+Institute of Psychiatry, Psychology & Neuroscience (IoPPN),   
+Kings College London  
+Box P092  
+De Crespigny Park  
+London SE5 8AF  
 
+email : stephen.newhouse@kcl.ac.uk  
+email : stephen.j.newhouse@gmail.com  
 
+github :https://github.com/KHP-Informatics  
+github: https://github.com/snewhouse  
+dockerhub: https://hub.docker.com/u/compbio/  
+
+web: http://core.brc.iop.kcl.ac.uk/  
+web: http://compbio.brc.iop.kcl.ac.uk/  
+web: http://www.slam.nhs.uk/brc/  
+
+Google is your Friend: https://www.google.co.uk/  
+
+uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
+
+Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
 
 
 
