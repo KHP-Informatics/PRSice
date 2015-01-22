@@ -8,6 +8,9 @@
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
 
+### PRSice Dockerised for your polygenic pleasure!
+Here we provide a Docker image of PRSice v1.1, for you to run on your Windows/Mac/Linux box. 
+
 *********************
 
 # PRSice: Polygenic Risk Score software
