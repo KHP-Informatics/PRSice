@@ -13,7 +13,7 @@ Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blo
 Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
 *********************
 
-### PRSice: Dockerised for your polygenic pleasure!
+### PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
 Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or Mac or Linux box.  
 _Why?_ ... So you can run it on any system!!!
 
