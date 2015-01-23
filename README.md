@@ -21,17 +21,7 @@ Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or
 _Why?_ ... So you can run it on any system!!!
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
-
-github :https://github.com/KHP-Informatics  
-github: https://github.com/snewhouse  
-dockerhub: https://hub.docker.com/u/compbio/  
-
-web: http://core.brc.iop.kcl.ac.uk/  
-web: http://compbio.brc.iop.kcl.ac.uk/  
-web: http://www.slam.nhs.uk/brc/  
-
-linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/  
-
+linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/   
 Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
 
 *********************
