@@ -38,19 +38,6 @@ The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSi
 The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
 
 *********************
-
-## Example Output
-
-The first two figures are based on a PRSice run over PGC Schizophrenia and RADIANT-UK Major Depressive Disorder data, as shown in our paper, while the quantile plot is produced from simulated data.
-
-![fig1](/figs/PGC2_MANUSCRIPT_FIGURES_BARPLOT_2014-09-16-eps-converted-to.png)
-
-![fig2](/figs/PGC2_MANUSCRIPT_FIGURES_POINTPLOT_2014-09-16-eps-converted-to.png)
-
-![fig3](/figs/EXAMPLE_3_QUANTILES_1_QUANTILES_PLOT.png)
-
-*********************
-
 ## Get me the Docker Version
 
 **Intsall docker**  
@@ -123,6 +110,19 @@ docker run \
     supper 0.5 \
     binary.target F"
 ```
+*********************
+
+## Example Output
+
+The first two figures are based on a PRSice run over PGC Schizophrenia and RADIANT-UK Major Depressive Disorder data, as shown in our paper, while the quantile plot is produced from simulated data.
+
+![fig1](/figs/PGC2_MANUSCRIPT_FIGURES_BARPLOT_2014-09-16-eps-converted-to.png)
+
+![fig2](/figs/PGC2_MANUSCRIPT_FIGURES_POINTPLOT_2014-09-16-eps-converted-to.png)
+
+![fig3](/figs/EXAMPLE_3_QUANTILES_1_QUANTILES_PLOT.png)
+
+
 
 http://www.carlboettiger.info/2014/09/22/containerizing-my-development-environment.html  
 
