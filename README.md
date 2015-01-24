@@ -14,22 +14,23 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
 The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
 The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
 
-*********************
-
-### PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
-Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or Mac or Linux box.  
-
->_Why?_ ... So you can run it on any system!!!
-
-**Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
-linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/   
-Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse  
-
-### Releases
+## Releases
 
 |Date| Release |
 |----------|-------------------------------------------------------------------|
 25/01/2015 | [prsice-1.1-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/1.1)
+
+*********************
+
+## PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
+Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or Mac or Linux box.  
+
+**Dockered by:** 
+- Stephen Newhouse <stepen.j.newhouse@gmail.com>    
+- [linkedin](uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/)    
+- [Twitter @s_j_newhouse](https://twitter.com/s_j_newhouse)   
+
+>_Why?_ ... So you can run it on any system!!!
 
 *********************
 
