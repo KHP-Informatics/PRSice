@@ -17,8 +17,9 @@ The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice
 *********************
 
 ### PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
-Here we provide a Docker image of PRSice v1.1, for you to run on your Windows or Mac or Linux box.  
-_Why?_ ... So you can run it on any system!!!
+Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or Mac or Linux box.  
+
+>_Why?_ ... So you can run it on any system!!!
 
 **Dockered by:** Stephen Newhouse <stepen.j.newhouse@gmail.com>  
 linkedin: uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a/   
