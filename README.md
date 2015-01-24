@@ -30,8 +30,6 @@ Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or 
 - [linkedin](http://uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a)    
 - [Twitter @s_j_newhouse](https://twitter.com/s_j_newhouse)   
 
->_Why?_ ... So you can run it on any system!!!
-
 *********************
 
 # PRSice: Polygenic Risk Score software
