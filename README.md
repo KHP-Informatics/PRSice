@@ -20,7 +20,7 @@ The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice
 
 |Date| Release |
 |----------|-------------------------------------------------------------------|
-25/01/2015 | [prsice-1.1-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/1.1)
+25/01/2015 | [prsice-1.1.0-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/v1.1.0)
 
 *********************
 
