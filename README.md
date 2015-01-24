@@ -3,6 +3,9 @@ PRSice: Polygenic Risk Score software
 
 PRSice (pronounced 'precise') a software package for calculating, applying, evaluating and plotting the results of polygenic risk scores  
 
+**Publised:**[Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)  
+**Website:** http://PRSice.info  
+
 *********************
 **Software:** PRSice  
 **Version:** 1.1  
@@ -10,8 +13,7 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
     - Jack Euesden <jack.euesden@kcl.ac.uk>  
     - Cathryn M. Lewis <cathryn.lewis@kcl.ac.uk>  
     - Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
-**Publised:**[Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)  
-**Website:** http://PRSice.info  
+
 **Read the Docs!**  
 The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
 The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
