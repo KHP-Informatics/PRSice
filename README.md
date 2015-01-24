@@ -16,19 +16,20 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
 
 **Availability:** PRSice is written in R, including wrappers for bash data management scripts and PLINK-1.9 to minimise computational time. PRSice runs as a command-line program with a variety of user-options
 
-## Releases
-
-|Date| Release |
-|----------|-------------------------------------------------------------------|
-25/01/2015 | [prsice-1.1.0-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/v1.1.0)
-
-### PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
+## PRSice: [Dockerised](https://www.docker.com/) for your polygenic pleasure!
 Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or Mac or Linux box.  
 
 #### Dockered by: 
 - Stephen J Newhouse <stepen.j.newhouse@gmail.com>    
 - [linkedin](http://uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a)    
 - [Twitter @s_j_newhouse](https://twitter.com/s_j_newhouse)   
+
+### Releases
+
+|Date| Release |
+|----------|-------------------------------------------------------------------|
+25/01/2015 | [prsice-1.1.0-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/v1.1.0)
+
 
 *********************
 
