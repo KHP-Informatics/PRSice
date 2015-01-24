@@ -26,9 +26,9 @@ Twitter: @s_j_newhouse https://twitter.com/s_j_newhouse
 
 ### Releases
 
-|Date| Version |
+|Date| Release |
 |----------|-------------------------------------------------------------------|
-25/01/2015 | [1.1](https://github.com/KHP-Informatics/PRSice/releases/tag/1.1)
+25/01/2015 | [prsice-1.1-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/1.1)
 
 *********************
 
