@@ -6,7 +6,10 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
 *********************
 **Software:** PRSice  
 **Version:** 1.1  
-**Authors:** Jack Euesden <jack.euesden@kcl.ac.uk>, Cathryn M. Lewis and Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
+**Authors:** 
+    - Jack Euesden <jack.euesden@kcl.ac.uk>
+    - Cathryn M. Lewis <cathryn.lewis@kcl.ac.uk>  
+    - Paul F. O'Reilly <paul.oreilly@kcl.ac.uk>  
 **Publised in [Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)**  
 **Website:** http://PRSice.info  
 
@@ -26,7 +29,7 @@ The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice
 Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or Mac or Linux box.  
 
 #### Dockered by: 
-- Stephen Newhouse <stepen.j.newhouse@gmail.com>    
+- Stephen J Newhouse <stepen.j.newhouse@gmail.com>    
 - [linkedin](http://uk.linkedin.com/pub/dr-stephen-newhouse/29/89a/11a)    
 - [Twitter @s_j_newhouse](https://twitter.com/s_j_newhouse)   
 
