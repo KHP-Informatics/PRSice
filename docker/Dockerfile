@@ -117,11 +117,11 @@ RUN /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "htt
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("fsmb",dependencies=TRUE)'  && \
     /usr/bin/Rscript --no-save --no-restore -e 'options(repos = list(CRAN = "http://cran.rstudio.com/")); install.packages("gtx",dependencies=TRUE)'
     
-ADD prsice_v1.2.tar.gz /usr/local/pipeline/
+ADD PRSice_v1.2.tar.gz /usr/local/pipeline/
 
-RUN cd /usr/local/pipeline/prsice_v1.2 && \
-    chmod -R 777 /usr/local/pipeline/prsice_v1.2* && \
-    cp -v /usr/local/pipeline/prsice_v1.2/* /usr/local/bin
+RUN cd /usr/local/pipeline/PRSice_v1.2 && \
+    chmod -R 777 /usr/local/pipeline/PRSice_v1.2* && \
+    cp -v /usr/local/pipeline/PRSice_v1.2/* /usr/local/bin
 
 #-------------------------------PERMISSIONS--------------------------
 RUN chmod -R 777 /usr/local/pipeline
