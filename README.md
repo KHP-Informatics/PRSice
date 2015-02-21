@@ -5,7 +5,7 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
 
 **Publised:**[Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)  
 **Software:** PRSice  
-**Version:** 1.1  
+**Version:** 1.2  
 **Authors:**   
     - Jack Euesden <jack.euesden@kcl.ac.uk>  
     - Cathryn M. Lewis <cathryn.lewis@kcl.ac.uk>  
@@ -60,17 +60,19 @@ git clone https://github.com/KHP-Informatics/PRSice.git
 
 cd PRSice/docker
 
-docker build --rm=true -t compbio/prsice:1.1 .
+docker build --rm=true -t compbio/prsice:1.2 .
 
 ```
 
 **or** 
 
 ```
-docker pull compbio/prsice:1.1
+docker pull compbio/prsice:1.2
 ```
 
+**or**
 
+download the release
 
 ## Runnig PRSice
 
@@ -89,6 +91,12 @@ The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSi
 The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
 
 ```
+## make dir for your data
+#
+mkdir ${HOME}/pgrs
+
+## run compbio/prsice:1.2
+#
 docker run \
   --rm \
   -it \
@@ -98,9 +106,9 @@ docker run \
   -e USER=pipeman \
   --user pipeman \
   --name prsice \
-  compbio/prsice:1.1 /bin/bash -c 
+  compbio/prsice:1.2 /bin/bash -c 
     "R \
-    --file=/usr/local/bin/PRSice_v1.1.R \
+    --file=/usr/local/bin/PRSice_v1.2.R \
     -q \
     --args 
     plink /usr/local/bin/plink1.9_x86_64 \
