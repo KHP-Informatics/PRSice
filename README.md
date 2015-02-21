@@ -28,6 +28,7 @@ Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or 
 
 |Date| Release |
 |----------|-------------------------------------------------------------------|
+21/02/2015 | [prsice-1.2.0-210215](https://github.com/KHP-Informatics/PRSice/releases/tag/v1.2.0)
 25/01/2015 | [prsice-1.1.0-240115](https://github.com/KHP-Informatics/PRSice/releases/tag/v1.1.0)
 
 
