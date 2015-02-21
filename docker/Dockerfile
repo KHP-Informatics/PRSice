@@ -9,7 +9,7 @@ ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
 # Remain current
-RUN apt-get update && apt-get dist-upgrade -y
+RUN apt-get update --fix-missing && apt-get dist-upgrade -y
 
 # Basic dependencies and tools
 RUN apt-get update && \
@@ -59,7 +59,6 @@ RUN apt-get update && \
  libconfig-dev \
  ncurses-dev \
  zlib1g-dev \
- yum \
  libX11-dev libXpm-dev libXft-dev libXext-dev \
  libatlas3-base \
  libblas3 \
@@ -91,7 +90,7 @@ RUN apt-get update && \
  r-cran-rsqlite
 
 #  upgrade
-RUN apt-get update -y && apt-get upgrade -y
+RUN apt-get update --fix-missing -y && apt-get upgrade -y
 
 #-------------------------------Add user----------------------------------------------------------------------------------#
 # Create a pipeline user:pipeman and group:ngsgroup
