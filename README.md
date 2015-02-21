@@ -56,23 +56,8 @@ boot2docker start
 ```
 
 ```
-git clone https://github.com/KHP-Informatics/PRSice.git
-
-cd PRSice/docker
-
-docker build --rm=true -t compbio/prsice:1.2 .
-
-```
-
-**or** 
-
-```
 docker pull compbio/prsice:1.2
 ```
-
-**or**
-
-download the release
 
 ## Runnig PRSice
 
@@ -90,7 +75,7 @@ See user docs or details on running PRSice:
 The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
 The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
 
-```
+```{bash}
 ## make dir for your data
 #
 mkdir ${HOME}/pgrs
@@ -98,22 +83,22 @@ mkdir ${HOME}/pgrs
 ## run compbio/prsice:1.2
 #
 docker run \
-  --rm \
-  -it \
+  --rm=true \
+  -i \
   -v ${HOME}/pgrs:/home/pipeman: \
   -w /home/pipeman \
   -e HOME=/home/pipeman \
   -e USER=pipeman \
   --user pipeman \
   --name prsice \
-  compbio/prsice:1.2 /bin/bash -c 
+  -t compbio/prsice:1.2 /bin/bash -c 
     "R \
     --file=/usr/local/bin/PRSice_v1.2.R \
     -q \
     --args 
     plink /usr/local/bin/plink1.9_x86_64 \
-    base /home/pipeman/TOY_BASE_GWAS.assoc \
-    target /home/pipeman/TOY_TARGET \
+    base /usr/local/bin/TOY_BASE_GWAS.assoc \
+    target /usr/local/bin/TOY_TARGET \
     slower 0 \
     sinc 0.01 \
     supper 0.5 \
