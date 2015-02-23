@@ -91,7 +91,7 @@ docker run --rm=true \
   --name prsice \
   -i \
   -t compbio/prsice:1.2.1 /bin/bash -c \
-    "R -q --file=/usr/local/bin/PRSice_v1.2.R --args \
+    "R -q --file=/usr/local/bin/PRSice_v1.2-multicore.R --args \
     plink /usr/local/bin/plink1.9_x86_64 \
     base /usr/local/bin/TOY_BASE_GWAS.assoc \
     target /usr/local/bin/TOY_TARGET_DATA \
