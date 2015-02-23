@@ -24,9 +24,9 @@ COPY fmsb_0.5.1.tar.gz /usr/local/pipeline/
 RUN R CMD INSTALL /usr/local/pipeline/fmsb_0.5.1.tar.gz
 
 # multicore version. allows ncpu to be called
-COPY ../src/PRSice_v1.2.1-multicore.R /usr/local/pipeline/
+COPY PRSice_v1.2.multicore.R /usr/local/pipeline/
 
-RUN chmod -R 777 /usr/local/pipeline/RSice_v1.2.1-multicore.R
+RUN chmod -R 777 /usr/local/pipeline/PRSice_v1.2.multicore.R
 
 #-------------------------------PERMISSIONS--------------------------
 RUN chmod -R 777 /usr/local/pipeline
