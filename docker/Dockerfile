@@ -18,6 +18,7 @@ RUN cd /usr/local/pipeline/PRSice_v1.2 && \
     chmod -R 777 /usr/local/pipeline/PRSice_v1.2* && \
     cp -v /usr/local/pipeline/PRSice_v1.2/* /usr/local/bin
 
+# install fsmb
 COPY fmsb_0.5.1.tar.gz /usr/local/pipeline/ 
 
 RUN R CMD INSTALL /usr/local/pipeline/fmsb_0.5.1.tar.gz
