@@ -5,7 +5,7 @@ PRSice (pronounced 'precise') a software package for calculating, applying, eval
 
 **Publised:**[Bioinformatics](http://bioinformatics.oxfordjournals.org/content/early/2014/12/28/bioinformatics.btu848.abstract)  
 **Software:** PRSice  
-**Version:** 1.2  
+**Version:** 1.2
 **Authors:**   
     - Jack Euesden <jack.euesden@kcl.ac.uk>  
     - Cathryn M. Lewis <cathryn.lewis@kcl.ac.uk>  
@@ -35,8 +35,8 @@ Here we provide a Docker image of PRSice v1.1 for you to run on your Windows or 
 *********************
 
 **Read the Docs!**  
-The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
-The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
+The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/docs/PRSice_VIGNETTE_v1.2.pdf)  
+ 
 
 *********************
 ## Get me the Docker Version
@@ -50,13 +50,13 @@ Mac: https://docs.docker.com/installation/mac/
 
 If on Windows or Mac then start **boot2docker**
 
-```
+```{bash}
 ## eg on Mac
 boot2docker start
 ```
 
-```
-docker pull compbio/prsice:1.2
+```{bash}
+docker pull compbio/prsice:1.2.1
 ```
 
 ## Runnig PRSice
@@ -72,38 +72,38 @@ Make sure you use the right binary for your system eg 64bit vx 32bit!
 **Running PRSice on a 64bit machine (x86_64)**
 
 See user docs or details on running PRSice:  
-The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_VIGNETTE_v1.2.pdf)  
-The Manual: [PRSice_Manual_171214.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/PRSice_Manual_171214.pdf)  
+The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSice/blob/master/docs/PRSice_VIGNETTE_v1.2.pdf) 
 
 ```{bash}
 ## make dir for your data
 #
 mkdir ${HOME}/pgrs
+cd ${HOME}/pgrs
 
-## run compbio/prsice:1.2
+## run compbio/prsice:1.2.1
 #
-docker run \
-  --rm=true \
-  -i \
-  -v ${HOME}/pgrs:/home/pipeman: \
+docker run --rm=true \
+  -v ${HOME}/pgrs:/home/pipeman \
   -w /home/pipeman \
   -e HOME=/home/pipeman \
   -e USER=pipeman \
   --user pipeman \
   --name prsice \
-  -t compbio/prsice:1.2 /bin/bash -c 
-    "R \
-    --file=/usr/local/bin/PRSice_v1.2.R \
-    -q \
-    --args 
+  -i \
+  -t compbio/prsice:1.2.1 /bin/bash -c \
+    "R -q --file=/usr/local/bin/PRSice_v1.2.R --args \
     plink /usr/local/bin/plink1.9_x86_64 \
     base /usr/local/bin/TOY_BASE_GWAS.assoc \
-    target /usr/local/bin/TOY_TARGET \
+    target /usr/local/bin/TOY_TARGET_DATA \
     slower 0 \
-    sinc 0.01 \
     supper 0.5 \
-    binary.target F"
+    sinc 0.01 \
+    covary F \
+    ncpu 4 \
+    figname /home/pipeman/EXAMPLE_1"
 ```
+
+
 *********************
 
 ## Example Output
