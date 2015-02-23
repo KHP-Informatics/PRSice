@@ -1,5 +1,5 @@
 # base image
-FROM compbio/prsice:1.2.1
+FROM compbio/prsice:1.1
 
 # Maintainer 
 MAINTAINER Stephen Newhouse stephen.j.newhouse@gmail.com
@@ -19,10 +19,13 @@ RUN cd /usr/local/pipeline/PRSice_v1.2 && \
     cp -v /usr/local/pipeline/PRSice_v1.2/* /usr/local/bin
 
 COPY fmsb_0.5.1.tar.gz /usr/local/pipeline/ 
+
 RUN R CMD INSTALL /usr/local/pipeline/fmsb_0.5.1.tar.gz
 
 # multicore version. allows ncpu to be called
 COPY ../src/PRSice_v1.2.1-multicore.R /usr/local/pipeline/
+
+RUN chmod -R 777 /usr/local/pipeline/RSice_v1.2.1-multicore.R
 
 #-------------------------------PERMISSIONS--------------------------
 RUN chmod -R 777 /usr/local/pipeline
