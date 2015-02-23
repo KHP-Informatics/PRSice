@@ -559,8 +559,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	}
 	write.table(c("6 26000000 33000000 mhc"), file=paste(wd,"mhc.txt",sep=""), col.names = F, row.names = F, quote = F)
 
-
-	direif(ggfig){
+	if(ggfig){
 	  library(ggplot2)
 	  library(plyr)
 	}
