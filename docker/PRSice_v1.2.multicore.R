@@ -551,13 +551,13 @@ for(basePhen in 1:length(base.phenotypes.names)){
 
 	setwd(wd)
         workingdir <- getwd()
-        cat("\n",workingdir)
+        cat("\r","working directiory is",workingdir)
 
 	mhc <- ""
 	if(remove.mhc){
 		mhc <- " --exclude mhc.txt range "
 	}
-	write.table(c("6 26000000 33000000 mhc"), "mhc.txt", col.names = F, row.names = F, quote = F)
+	write.table(c("6 26000000 33000000 mhc"), file=paste(wd,"mhc.txt",sep=""), col.names = F, row.names = F, quote = F)
 
 
 	direif(ggfig){
