@@ -14,7 +14,7 @@ cat(" ################################# \n # \n # \n # \n # \n # PRSice: Polygen
 #  Default options
 #
 #################################
-								
+
 ## essential
 target <-  NA
 base <-   NA
@@ -41,13 +41,13 @@ ggfig <-  T
 barchart.levels <- "0.001, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5"
 barpalatte <- "YlOrRd"
 best.thresh.on.bar <- F
-scatter.R2 <- F						
+scatter.R2 <- F
 figname <- "PRSice"
 bar.col.is.pval <- T
 bar.col.is.pval.lowcol <- "dodgerblue"
 bar.col.is.pval.highcol <- "firebrick"
 
-# clumping							
+# clumping
 clump.snps <- T
 clump.p1 <- 1
 clump.p2 <- 1
@@ -60,13 +60,13 @@ prune.kb.wind <- 50
 prune.kb.step <- 2
 prune.kb.r2 <- 0.8
 
-							
-# high density scoring							
+
+# high density scoring
 slower <- 0.0001
 supper <- 0.5
 sinc <-  0.00005
 fastscore <- F
-							
+
 # dosage
 dosage <- F
 dosage.format <- "gen"
@@ -85,7 +85,7 @@ geno.is.ped <- F
 geno.as.list <- F
 
 # miscellaneous options
-wd <-  "./"							
+wd <-  "./"
 print.time <-  T
 cleanup <- T
 plinkpath <-  "./"
@@ -125,7 +125,7 @@ size.targ <- NA
 # multiple phenotype options
 multiple.target.phenotypes <- F
 target.phenotypes <-  NA #  "V2,V3"
-target.phenotypes.binary <- NA # "T,T"  ## NB:: 'QT' or 'BIN' 
+target.phenotypes.binary <- NA # "T,T"  ## NB:: 'QT' or 'BIN'
 multiple.base.phenotypes <- F
 base.phenotypes.names <- NA  ## sub in for PHEN.NAME
 
@@ -156,7 +156,7 @@ if(os == "windows"){
 	print("ERROR: Windows not supported")
 	quit()
 }
-													
+
 
 if(dosage){
 	sinc <- 0.001
@@ -215,7 +215,7 @@ if(multiple.base.phenotypes){
 }
 
 if(multiple.target.phenotypes){
-  target.phenotypes <- strsplit(gsub(" ", "", target.phenotypes), split=",")[[1]]  
+  target.phenotypes <- strsplit(gsub(" ", "", target.phenotypes), split=",")[[1]]
   target.phenotypes.binary  <- as.logical(strsplit(gsub(" ", "", target.phenotypes.binary), split=",")[[1]])
   if(is.na(target.phenotypes)){
     cat("ERROR: Please select target phenotypes to use, using target.phenotypes \n or set multiple.target.phenotypes F. \n Quitting")
@@ -228,7 +228,7 @@ if(multiple.target.phenotypes){
   if(length(target.phenotypes) != length(target.phenotypes.binary)){
   	cat("ERROR: Different number of target phenotype names and target phenotype types specified \n Check these lists are the same length \n Quitting")
   	quit()
-  } 
+  }
 }
 
 if(!sumsum & quantiles){
@@ -245,7 +245,7 @@ if(!sumsum & quantiles){
 
 if(calculate.abc.r2 & binary.target){
   n1 <- n.ca.base + n.co.base
-  n2 <- n.ca.targ + n.co.targ 
+  n2 <- n.ca.targ + n.co.targ
   sampling1 <- n.ca.base / n1
   sampling2 <- n.ca.targ / n2
   if(is.na(n.ca.base) | is.na(n.co.base) | is.na(n.ca.targ) | is.na(n.co.targ) ){
@@ -464,27 +464,27 @@ estimateVg2FromP=function(p,n1,nsnp,vg1=0,n2=n1,corr=1,plower=0,pupper=1,weighte
 
 if(!sumsum){
 for(basePhen in 1:length(base.phenotypes.names)){
-	
-	if(multiple.base.phenotypes){ 
+
+	if(multiple.base.phenotypes){
 	  if(basePhen == 1){
     	base.temp <- base
     	base <- gsub("PHEN.NAME", base.phenotypes.names[basePhen], base)
-  	  } 
+  	  }
 	  if(basePhen > 1){
   	    base <- gsub("PHEN.NAME", base.phenotypes.names[basePhen], base.temp)
-  	  } 
+  	  }
       cat(paste("Constructing Polygenic Scores for ", base.phenotypes.names[basePhen], " Risk \n"))
     }
-	
+
 	if(dosage){
-	
+
 	  cat(" ################################# \n # \n #  Dosage data defaults \n # \n ################################# \n")
 	  if(dos.impute2){
 	    dosage.format <- "gen"
 	    dos.skip0 <- 1
 	    dos.skip1 <- 1
 	    dos.coding <- 1
-	    dos.format <- 3	
+	    dos.format <- 3
 	  }
 	  if(!dos.fam.is.samp){
 	    target.fam <- dos.sep.fam
@@ -512,14 +512,14 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  }
 	  if(!is.na(target)){
 	    gen.name <- target
-	  }	
+	  }
 	}
-	
-	
+
+
 	cat(" ################################# \n # \n #  Check options match \n # \n ################################# \n")
-	
+
 	use.beta <- F
-	
+
 	if(ancestry.dim != "MDS" & ancestry.dim != "PCA"){
 	  print("ERROR: cannot calculate that format of ancestry informative covariates")
 	  quit()
@@ -528,48 +528,50 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  print("ERROR: plink-1.07 does not support principal components, plink-1.9 does not support dosages")
 	  quit()
 	}
-	
+
 	if(is.na(target) & is.na(dos.path.to.lists) & is.na(dos.list.file)){
 	  print("ERROR: Please Supply a TARGET DATA SET");quit()
 	}
 	if(is.na(base)){
 	  print("ERROR: Please Supply a BASE DATA SET");quit()
 	}
-	
+
 	#if(is.na(plink)){
 	#  print("NO PLINK path specified, this will be downloaded (key `A' if prompted)")
 	#}
-	
+
 	if(is.na(plink)){
 	  cat("ERROR: Please supply a path to PLINK. \n For Download Links, see www.PRSice.info \n NB: PLINK-1.07 is required for dosage data, PLINK2 is required for genotype data \n Quitting \n"); quit()
 	}
-	
-	
+
+
 	if(wd == "./"){
 	  print("Using current directory as working directiory")
 	}
-	
+
 	setwd(wd)
-	
+        workingdir <- getwd()
+        cat("\n",workingdir)
+
 	mhc <- ""
 	if(remove.mhc){
 		mhc <- " --exclude mhc.txt range "
 	}
 	write.table(c("6 26000000 33000000 mhc"), "mhc.txt", col.names = F, row.names = F, quote = F)
-	
-	
-	if(ggfig){
+
+
+	direif(ggfig){
 	  library(ggplot2)
 	  library(plyr)
 	}
-	
+
 	if(binary.target){
 	  library(fmsb)
 	}
-	
+
 	options("scipen"=100,"digits"=4)
-	
-	
+
+
 	#cat(" ################################# \n # \n #  Install PLINK if it's missing \n # \n ################################# \n")
 	#if(is.na(plink)){
 	#  if(!dosage){
@@ -606,11 +608,11 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	#  system(paste("mv ", plinkpath, "plink ", plinkpath, "PLINK_", os, "_", Sys.Date(), sep=""))
 	#  plink <- paste(plinkpath, "PLINK_", os, "_", Sys.Date(), sep="")
 	#}
-	
-	
+
+
 	cat(" ################################# \n # \n #  Check base input format \n # \n ################################# \n")
-		
-	
+
+
 	if(basePhen == 1 ){
   	  if(plink.silent){
 	    plink <- paste(plink, " --silent ")
@@ -619,7 +621,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    plink <- paste(plink, " --allow-no-sex ")
 	  }
 	}
-		
+
 	# default situation - assume a conventional header line to base
 	system(paste("head ", base, " > head_disc"))
 	head.disc <- read.table("head_disc", head = T)
@@ -633,7 +635,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  if(length(col6) == 0){
 		print("ERROR: No OR column in base data");quit()
 	  }
-	}	
+	}
 	col7 <- which(colnames(head.disc) == "SE"); if(length(col7) == 0){print("WARNING: No SE column in base data")}
 	col8 <- which(colnames(head.disc) == "P"); if(length(col8) == 0){print("ERROR: No P-val column in base data");quit()}
 	## check for missing data in columns, reorder to account for this
@@ -677,10 +679,10 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  system(paste("awk '{print $",col1,chr.awk,bp.awk,",$",col4,a2.awk,",$",col6,se.awk,",$",col8,"}' ", base, " > reordered_base", sep  =""))
 	  system(paste("echo SNP",chr.head,bp.head,"A1",a2.head,"BETA",se.head," P > HEADER"))
 	}
-	
+
 	head.disc <- as.vector(t(read.table("HEADER", head = F)))
-	
-	
+
+
 	if(geno.is.ped & !geno.as.list){
 	  cat(" ################################# \n # \n #   Reformat Target \n # \n ################################# \n")
 	    system(paste(plink," --noweb ", " --threads ",ncpu, " ", " --threads ",ncpu, " --file", target,"--make-bed --out", target))
@@ -692,7 +694,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      system(paste(plink," --noweb ", " --threads ",ncpu, " --file", file.name.chr,"--make-bed --out", file.name.chr))
 	    }
 	}
-	
+
 	if(!dosage & !geno.as.list){
 	  system(paste("awk '{print $",which(head.disc=="SNP"),"}' reordered_base | sort -k1,1 > base_SNPS", sep=""))
 	  if(as.numeric(gsub(" ", "", system(paste("awk '{print $2}' ",target, ".bim  | sort -k1,1 | join -1 1 -2 1 ``-'' base_SNPS | wc -l",sep = ""),intern=T)))==0){
@@ -705,12 +707,12 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    cat("ERROR: No SNP's present in both base and target dataset. Exiting. \n"); quit()
 	  }
 	}
-	
-	
+
+
 	if(!dosage){
-	
+
 	cat(" ################################# \n # \n #   Remove Ambiguous SNPs \n # \n ################################# \n")
-	
+
 	  if(!use.beta){
 	    system(paste("tail -n +2 reordered_base | awk '{print $",which(head.disc=="SNP"),
 					",$",which(head.disc=="A1"),",log($",which(head.disc=="OR"),")}' | sort -k1,1 > temp.raw", sep = ""))
@@ -719,8 +721,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system(paste("tail -n +2 reordered_base | awk '{print $",which(head.disc=="SNP"),
 					",$",which(head.disc=="A1"),",$",which(head.disc=="BETA"),"}' | sort -k1,1 > temp.raw", sep = ""))
 	  }
-	
-	  if(!geno.as.list){ 
+
+	  if(!geno.as.list){
 	    system(capture.output(cat("awk '{print $2,$5,$6}' ", target,".bim | sort -k1,1 | join -1 1 -2 1   temp.raw   ``-'' | awk '($4 == \"A\" && $5 == \"T\" ||$4 == \"T\" && $5 == \"A\" || $4 == \"C\" && $5 == \"G\"  || $4 == \"G\" && $5 == \"C\"  ){print $1}' > synonymous_snps  \n ", sep = ""))[1])
 	  system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile ", target," --exclude synonymous_snps  --make-bed   --out non_synonymous_snps_only", sep = ""))
 	  }
@@ -730,17 +732,17 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      system( capture.output(cat("awk '{print $2,$5,$6}' ", file.name.chr,".bim | sort -k1,1 | join -1 1 -2 1   temp.raw   ``-'' | awk '($4 == \"A\" && $5 == \"T\" ||$4 == \"T\" && $5 == \"A\" || $4 == \"C\" && $5 == \"G\"  || $4 == \"G\" && $5 == \"C\"  ){print $1}' > synonymous_snps_",chrnum,"  \n ", sep = ""))[1])
 	      system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile ", file.name.chr," --exclude synonymous_snps_",chrnum,"  --make-bed   --out non_synonymous_snps_only_",chrnum, sep = ""))
 	    }
-	    system("cat non_synonymous_snps_only_*.bim  > non_synonymous_snps_only.bim")  
+	    system("cat non_synonymous_snps_only_*.bim  > non_synonymous_snps_only.bim")
 	  }
 	}
-	
-	
-	
+
+
+
 	if(clump.snps){
 	  cat(" ################################# \n # \n #   Clump \n # \n ################################# \n")
 	}
-	
-	
+
+
 	if(dosage){
 	  system(paste("tail -n +2 reordered_base   > cleaned_base ", sep = ""))
 	}
@@ -748,9 +750,9 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  system(paste("awk '{print $2}' non_synonymous_snps_only.bim | sort -k 1,1 >  ./TARGET_SNPs", sep = ""))
 	  system(paste("tail -n +2 reordered_base | sort -k1,1  | join -1 1 -2 1 ``-'' ./TARGET_SNPs   > cleaned_base ", sep = ""))
 	}
-	
+
 	system("cat HEADER cleaned_base > cleaned_base.assoc")
-	
+
 	if(clump.snps & !dosage & !(geno.as.list)){
 			## clump and extract independant snps
 			system(paste(plink," --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only --clump cleaned_base.assoc --clump-p1 ",clump.p1," --clump-p2 ",clump.p2," --clump-r2 ",clump.r2," --clump-kb ",clump.kb," --out cleaned_base", sep=" "))
@@ -765,11 +767,11 @@ for(basePhen in 1:length(base.phenotypes.names)){
 				system(paste("tail -n +2 cleaned_base.assoc | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' | awk '{print $",which(head.disc=="SNP"),
 					",$",which(head.disc=="A1"),",$",which(head.disc=="BETA"),"}' > rawfile.raw", sep = ""))
 				system(paste("awk '{print $",which(head.disc=="SNP"),",$",which(head.disc=="P"),"}' cleaned_base.assoc | tail -n +2 | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' > rangelist_ranges"))
-			}	
+			}
 	  if(length(dir()[grep("cleaned_base.assoc", dir())]) == 0 ){
 	    cat("ERROR: Clumping Failed, check dicovery data set format \n "); quit()
 	  }
-	
+
 	}
 	if(clump.snps & !dosage & geno.as.list){
 			## clump and extract independant snps
@@ -792,9 +794,9 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  if(length(dir()[grep("cleaned_base.assoc", dir())]) == 0 ){
 	    cat("ERROR: Clumping Failed, check dicovery data set format \n "); quit()
 	  }
-				
+
 	}
-	
+
 	if(clump.snps & dosage & dosage.format == "gen"){
 	  ## clump and extract independant snps
 	  system(paste(plink," --noweb ", " --threads ",ncpu, " --dosage ", gen.name, " noheader format=",dos.format," dose",dos.coding," skip0=",dos.skip0," skip1=",dos.skip1," --fam ", target.fam,"  --clump cleaned_base.assoc --clump-p1 ",clump.p1," --clump-p2 ",clump.p2," --clump-r2 ",clump.r2," --clump-kb ",clump.kb," --out cleaned_base", sep=""))
@@ -809,20 +811,20 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system(paste("tail -n +2 cleaned_base.assoc | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' | awk '{print $",which(head.disc=="SNP"),
 	      ",$",which(head.disc=="A1"),",$",which(head.disc=="BETA"),"}  | sort -k1,1' > rawfile.raw", sep = ""))
 	  system(paste("awk '{print $",which(head.disc=="SNP"),",$",which(head.disc=="P"),"}' cleaned_base.assoc | tail -n +2 | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' > rangelist_ranges"))
-	  }	
+	  }
 	}
-	
-	
+
+
 	if(prune.snps){
 	  cat(" ################################# \n # \n #   Prune \n # \n ################################# \n")
-	
+
 	  if(!dosage & !(geno.as.list)){
 	    ## prune and extract independant snps
 	    system(paste(plink," --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only --indep-pairwise ",prune.kb.wind," kb ",prune,kb.step, prune.kb.r2," --out cleaned_base", sep=" "))
 	    system("tail -n +2 cleaned_base.prune.in | awk '{print $3}'  | sort -k1,1 | awk '($1 != \"\"){print}'  > LE_SNPs")
 	    ## linkage equilibrium snps
 	  }
-	
+
 	  if(!dosage & (geno.as.list)){
 	    ## prune and extract independant snps
 	    for(chrnum in 1:22){
@@ -830,7 +832,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    }
 	    system("cat cleaned_base_*prune.in > cleaned_base.prune.in")
 	  }
-	  
+
 	  system("tail -n +2 cleaned_base.prune.in | awk '{print $3}'  | sort -k1,1 | awk '($1 != \"\"){print}'  > LE_SNPs")
 	  ## linkage equilibrium snps
 	  if(!use.beta){
@@ -842,10 +844,10 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system(paste("tail -n +2 cleaned_base.assoc | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' | awk '{print $",which(head.disc=="SNP"),
 			",$",which(head.disc=="A1"),",$",which(head.disc=="BETA"),"}' > rawfile.raw", sep = ""))
 				system(paste("awk '{print $",which(head.disc=="SNP"),",$",which(head.disc=="P"),"}' cleaned_base.assoc | tail -n +2 | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' > rangelist_ranges"))
-	  }	
+	  }
 	}
-	
-	
+
+
 	if(prune.snps & dosage & dosage.format == "gen"){
 	  ## prune and extract independant snps
 	  system(paste(plink," --noweb ", " --threads ",ncpu, " --dosage ", gen.name, " noheader format=",dos.format," dose",dos.coding," skip0=",dos.skip0," skip1=",dos.skip1," --fam ", target.fam,"  --indep-pairwise ",prune.kb.wind," ",prune,kb.step," ",prune.kb.r2," --out cleaned_base", sep=""))
@@ -860,11 +862,11 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system(paste("tail -n +2 cleaned_base.assoc | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' | awk '{print $",which(head.disc=="SNP"),
 	      ",$",which(head.disc=="A1"),",$",which(head.disc=="BETA"),"}  | sort -k1,1' > rawfile.raw", sep = ""))
 	  system(paste("awk '{print $",which(head.disc=="SNP"),",$",which(head.disc=="P"),"}' cleaned_base.assoc | tail -n +2 | sort -k1,1 | join -1 1 -2 1 LE_SNPs ``-'' > rangelist_ranges"))
-	  }	
+	  }
 	}
-	
-	
-	
+
+
+
 	if(!clump.snps & !prune.snps){
 		if(!use.beta){
 			system(paste("tail -n +2 cleaned_base.assoc | awk '{print $",which(head.disc=="SNP"),
@@ -877,30 +879,30 @@ for(basePhen in 1:length(base.phenotypes.names)){
 			system(paste("awk '{print $",which(head.disc=="SNP"),",$",which(head.disc=="P"),"}' cleaned_base.assoc | tail -n +2  > rangelist_ranges"))
 		}
 	}
-	
-	
-	
+
+
+
 	cat(" ################################# \n # \n #   Deal with strand flips if target is in genotype format and produce input files for polygenic scoring \n # \n ################################# \n")
-	
+
 	if(!dosage){
 	  ## strand flips
 	  system(paste("awk '{print $2,$5,$6}' non_synonymous_snps_only.bim | sort -k1,1 | join -1 1 -2 1   rawfile.raw   ``-'' | awk '($2 != $4 && $2 != $5) {print $1}' > flip_list.txt", sep = 	""))
-	  
-	  if(!(geno.as.list)){ 
+
+	  if(!(geno.as.list)){
 	    system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only --flip flip_list.txt ",mhc,"  --make-bed   --out flipped_target", sep = ""))
 	  }
 	  if(geno.as.list){
-	  	for(chrnum in 1:5){ 
+	  	for(chrnum in 1:5){
 	      system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only_",chrnum," --flip flip_list.txt  --make-bed   --out flipped_target_",chrnum, sep = ""))
 	    }
-	  	for(chrnum in 6){ 
+	  	for(chrnum in 6){
 	      system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only_",chrnum," --flip flip_list.txt ",mhc,"  --make-bed   --out flipped_target_",chrnum, sep = ""))
 	    }
-	  	for(chrnum in 7:22){ 
+	  	for(chrnum in 7:22){
 	      system(paste( plink, "        --noweb ", " --threads ",ncpu, " --bfile non_synonymous_snps_only_",chrnum," --flip flip_list.txt   --make-bed   --out flipped_target_",chrnum, sep = ""))
 	    }
 	  }
-	
+
 	  system("rm rangelist.txt", ignore.stdout=T,ignore.stderr=T)
 	  if(!fastscore){
 	    system( capture.output(cat("awk 'BEGIN{ for (i=",slower,"; i < ",supper,"; i+=",sinc,") printf(\"%.",ceiling(-log10(sinc)),"f\\n\", i); }' | awk '{print $1,0,$1}' > 	rangelist.txt \n ", sep=""))[1])
@@ -911,7 +913,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    write.table(data.frame(barchart.levels, rep(0, times=length(barchart.levels)), barchart.levels), "rangelist.txt", col.names = F, row.names = F, quote = F)
 	    lists <- read.table("rangelist.txt", head = F)
 	    write.table(data.frame(paste("PROFILES",barchart.levels,"profile",sep=".")), "profile_list", col.names = F, row.names = F, quote = F)
-	  } 
+	  }
 	  if(mend.score){
 	    system(paste("tail -n +2 cleaned_base.assoc | sort -gk",which(head.disc=="P"),",",which(head.disc=="P")," | head -n ", mend.score.len," | awk      '{print $",which(head.disc=="P"),"}' > best.n.snps ", sep=""))
 	    best.n <- read.table("best.n.snps",head=F)
@@ -929,15 +931,15 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("cat temp.profile_list PROFILES.1.profile > profile_list")
 	    system("mv rangelist.txt temp.rangelist.txt")
 	    system("echo '1 0 1' | cat temp.rangelist.txt ``-'' > rangelist.txt")
-	  } 
-	}  
-	  
+	  }
+	}
+
 	if(dosage){
 	  system("rm rangelist.txt", ignore.stdout=T,ignore.stderr=T)
 	  if(!fastscore){
 	    system( capture.output(cat("awk 'BEGIN{ for (i=",slower,"; i < ",supper,"; i+=",sinc,") printf(\"%.",ceiling(-log10(sinc)),"f\\n\", i); }' | awk '{print $1,0,$1}' > 	  rangelist.txt \n ", sep=""))[1])
 	    lists <- read.table("rangelist.txt", head = F)
-	    write.table(data.frame(paste("PROFILES.S", seq(1, length(lists$V1), 1), ".profile", sep = "")), "profile_list", col.names=F, row.names=F,quote=F)	
+	    write.table(data.frame(paste("PROFILES.S", seq(1, length(lists$V1), 1), ".profile", sep = "")), "profile_list", col.names=F, row.names=F,quote=F)
 	  }
 	  if(fastscore){
 	    write.table(data.frame(barchart.levels, rep(0, times=length(barchart.levels)), barchart.levels), "rangelist.txt", col.names = F, row.names = F, quote = F)
@@ -953,7 +955,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("cat temp.rangelist.txt best.n > rangelist.txt")
 	    lists <- read.table("rangelist.txt", head = F)
 	    system("mv profile_list temp.1.profile_list")
-	    write.table(data.frame(paste("PROFILES.S", seq(length(lists$V1)+1, length(lists$V1)+mend.score.len, 1), ".profile", sep = "")), "temp.2.profile_list", col.names=F, row.names=F,quote=F)	
+	    write.table(data.frame(paste("PROFILES.S", seq(length(lists$V1)+1, length(lists$V1)+mend.score.len, 1), ".profile", sep = "")), "temp.2.profile_list", col.names=F, row.names=F,quote=F)
 	    system("cat temp.1.profile_list temp.2.profile_list > profile_list" )
 	  }
 	  if(score.at.1){
@@ -963,19 +965,19 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    }
 	    if(!mend.score){
 	      system("cat temp.profile_list PROFILES.S",length(lists$V1)+1,".profile > profile_list")
-	    }   
+	    }
 	    system("mv rangelist.txt temp.rangelist.txt")
 	    system("echo '1 0 1' | cat temp.rangelist.txt ``-'' > rangelist.txt")
 	  }
 	}
-	
+
 	cat(" ################################# \n # \n #   Polygenic scoring! \n # \n ################################# \n")
-	
-	
+
+
 	if(!dosage & !(geno.as.list)){
 		system(paste(plink, "        --noweb ", " --threads ",ncpu, " --bfile flipped_target   --score rawfile.raw   --q-score-range rangelist.txt rangelist_ranges  --out PROFILES"))
 	}
-	
+
 	if(!dosage & (geno.as.list)){
 	  for(chrnum in 1:22){
 	    system(paste(plink, "        --noweb ", " --threads ",ncpu, " --bfile flipped_target_",chrnum,"   --score rawfile.raw   --q-score-range rangelist.txt rangelist_ranges  --out ",chrnum,"PROFILES",sep=""))
@@ -983,7 +985,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	}
 	if(dosage & is.na(dos.path.to.lists) & is.na(dos.list.file)){
 		system(paste(plink," --noweb ", " --threads ",ncpu, " --dosage ", gen.name, " noheader format=",dos.format," dose",dos.coding," skip0=",dos.skip0," skip1=",dos.skip1," --fam ", target.fam,"  --score rawfile.raw --q-score-file rangelist_ranges --q-score-range rangelist.txt   --out PROFILES", sep = ""))
-	}            
+	}
 	## NB: score chromosome by chromosome if dosage data in separate files per chromosome. Sum these later on to get profiles
 	if(dosage & (!is.na(dos.path.to.lists) | !is.na(dos.list.file))){
 	  for(i in 1:22){
@@ -993,15 +995,15 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    if(!is.na(dos.list.file)){
 	      gen.name <- as.character(read.table(dos.list.file, head = F)[i,1])
 	    }
-	    system(paste(plink," --noweb ", " --threads ",ncpu, " --dosage ",gen.name," noheader format=",dos.format," dose",dos.coding," skip0=",dos.skip0," skip1=",dos.skip1," --fam ", target.fam,"  --score rawfile.raw --q-score-file rangelist_ranges --q-score-range rangelist.txt   --out ",i,"PROFILES", sep = ""))  
+	    system(paste(plink," --noweb ", " --threads ",ncpu, " --dosage ",gen.name," noheader format=",dos.format," dose",dos.coding," skip0=",dos.skip0," skip1=",dos.skip1," --fam ", target.fam,"  --score rawfile.raw --q-score-file rangelist_ranges --q-score-range rangelist.txt   --out ",i,"PROFILES", sep = ""))
 	  }
-	}            
-	
-	
+	}
+
+
 	if(covary & is.na(user.covariate.file)){
 	  cat(" ################################# \n # \n #   Covary by generated dimensions \n # \n ################################# \n")
 	}
-	
+
 	if(covary & is.na(user.covariate.file)){
 	  if(!dosage){
 	  	if(geno.as.list){
@@ -1022,21 +1024,21 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	        system("sed -e '1s/P//g' ANCESTRY_INFORMATIVE_DIMENSIONS.eigenvec > ANCESTRY_INFORMATIVE_DIMENSIONS.readable")
 	        pc.file <- "ANCESTRY_INFORMATIVE_DIMENSIONS.readable"
 	      }
-	    } 
+	    }
 	  }
 	}
-	
+
 	if(covary & !is.na(user.covariate.file)){
 	  pc.file<- user.covariate.file
 	}
-	
+
 	if(ext.phen & !multiple.target.phenotypes){
 	  pheno.data <- read.table(pheno.file, head = F)
 	}
 	if(ext.phen & multiple.target.phenotypes){
 	  pheno.data <- read.table(pheno.file, head = T)
 	}
-	
+
 	####################################################
 	## Extract phenotype data and save it somewhere::
     ####################################################
@@ -1046,31 +1048,31 @@ for(basePhen in 1:length(base.phenotypes.names)){
     }
 	if(quantiles){
 	  if(ext.phen){
-	    phen.file.internal <- pheno.data 
+	    phen.file.internal <- pheno.data
 	  }
 	  if(!ext.phen){
 	    if(!dosage){
 	      if(!geno.as.list){
-            phen.file.internal <- read.table(paste(target, "fam", sep  = "."), head = F)[,c("V2", "V6")] 
+            phen.file.internal <- read.table(paste(target, "fam", sep  = "."), head = F)[,c("V2", "V6")]
 	      }
 	      if(geno.as.list){
-            phen.file.internal <- read.table("flipped_target_1.fam", head = F)[,c("V2", "V6")]     	
+            phen.file.internal <- read.table("flipped_target_1.fam", head = F)[,c("V2", "V6")]
 	      }
 	    }
       }
       names(phen.file.internal) <- c("ID", "PHEN")
-      if(levels(as.factor(phen.file.internal$PHEN))[1]=="1"&levels(as.factor(phen.file.internal$PHEN))[2]=="2"){ 
+      if(levels(as.factor(phen.file.internal$PHEN))[1]=="1"&levels(as.factor(phen.file.internal$PHEN))[2]=="2"){
         phen.file.internal$PHEN <- phen.file.internal$PHEN - 1
-	  }  
+	  }
     phen.file.internal <- phen.file.internal[phen.file.internal$PHEN != -9 , ]
     }
-	
-	if(covary){	
+
+	if(covary){
 	  pcs <- read.table(pc.file, head = T)
 	}
 	profile.list <- read.table("profile_list", head = F)
-	lists.full <- lists	
-		
+	lists.full <- lists
+
 	## SOMETIMES: an empty list will not print. this section is important - it takes the lists which did print and retains only these from the list of names to read and test model fit etc
 	if(!dosage){
 	  if(geno.as.list){
@@ -1084,7 +1086,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	        lists.out <- rbind(lists.out, lists.temp)
 	      }
 	    }
-	    lists <- lists[!duplicated(lists$V1),]  
+	    lists <- lists[!duplicated(lists$V1),]
 	    profile.list.temp <- data.frame(profile.list, lists.full)
 	    names(profile.list.temp) <- c("V1", "V2", "V3","V4")
 	    reduced.list <- data.frame(profile.list.temp$V1[profile.list.temp$V2 %in% lists$V1])
@@ -1130,7 +1132,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            names(prof.temp) <- c("temp.IID", "temp.SCORE","temp.PHENO")
 	            if(prev.files){
 	              prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	              prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	            }
 	            prof.out <- prof.temp
@@ -1147,18 +1149,18 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            names(prof.temp) <- c("temp.IID", "temp.SCORE","temp.PHENO")
 	            if(prev.files){
 	              prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	              prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	            }
 	            prof.out <- prof.temp
 	            names(prof.out) <- c("IID","SCORE","PHENO")
 	            prof <- prof.out
-	            prev.files <- T         
+	            prev.files <- T
 	          }
 	        prev.files <- F
 	        }
 	      }
-	      if((!dosage & !geno.as.list)  | (dosage & is.na(dos.path.to.lists) & is.na(dos.list.file))){			
+	      if((!dosage & !geno.as.list)  | (dosage & is.na(dos.path.to.lists) & is.na(dos.list.file))){
 		    ## Default - no fastscore
 		    prof <- read.table(paste(reduced.list[i], sep = ""), head  =T)
 	        prof <- prof[,c("IID", "PHENO", "SCORE")]
@@ -1168,12 +1170,12 @@ for(basePhen in 1:length(base.phenotypes.names)){
 		    prof <- merge(x = prof, by.x = "IID", y = pheno.data, by.y = "V1")
 	      }
 		  if(!ext.phen) {
-	        prof <- prof[prof$PHENO != -9,] 
+	        prof <- prof[prof$PHENO != -9,]
 	        prof <- prof[!is.na(prof$PHENO),]
-	        if(levels(as.factor(prof$PHENO))[1]=="1"&levels(as.factor(prof$PHENO))[2]=="2"){ 
+	        if(levels(as.factor(prof$PHENO))[1]=="1"&levels(as.factor(prof$PHENO))[2]=="2"){
 		      prof$PHENO <- prof$PHENO - 1
 	        }
-	        if(!(levels(as.factor(prof$PHENO))[1]=="0"&levels(as.factor(prof$PHENO))[2]=="1")){ 
+	        if(!(levels(as.factor(prof$PHENO))[1]=="0"&levels(as.factor(prof$PHENO))[2]=="1")){
 		      print("ERROR: Unrecognised values for binary phenotype.");quit()
 	        }
 	      }
@@ -1191,7 +1193,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            coefficient[i]  <- summary(model.logit)$coefficients[2,1]
 	            s.err[i] <- summary(model.logit)$coefficients[2,2]
 	          }
-		      r2.out[i] <- NagelkerkeR2(model.logit)$R2 - NagelkerkeR2(model.null)$R2  
+		      r2.out[i] <- NagelkerkeR2(model.logit)$R2 - NagelkerkeR2(model.null)$R2
 	        }
 	        if(covary & !ext.phen){
 	          prof <- merge(x = prof, by.x = "IID", y = pcs, by.y = "IID")
@@ -1228,7 +1230,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          prof.all.scores <- prof.red
 	        }
 	        if(i > 1){
-	           prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")    
+	           prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")
 	        }
 	      }
 	      nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]
@@ -1238,20 +1240,20 @@ for(basePhen in 1:length(base.phenotypes.names)){
           if(calculate.abc.r2){
           	abc.r2[i] <- estimateVg2FromP(prevalence1=prevalence1,
           	  prevalence2=prevalence2,
-          	  n1=n1, 
-          	  sampling1= sampling1, 
-          	  n2= n2, 
-          	  sampling2= sampling2, 
-          	  nsnp= nsnps[i], 
-          	  plower = 0, 
-          	  pupper = lists$V1[i], 
-          	  binary=binary.target, 
+          	  n1=n1,
+          	  sampling1= sampling1,
+          	  n2= n2,
+          	  sampling2= sampling2,
+          	  nsnp= nsnps[i],
+          	  plower = 0,
+          	  pupper = lists$V1[i],
+          	  binary=binary.target,
           	  p=p.out[i],
           	  nullfraction=pi0
           	)$vg
           }
 	    }
-	  }	
+	  }
 	  ## linear regression on phenotype
 	  if(!binary.target){
 	    for(i in 1:length(lists$V1)){
@@ -1261,7 +1263,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          names(prof.temp) <- c("temp.IID", "temp.SCORE")
 	          if(j > 1){
 	            prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	            prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	            prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	            prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	          }
 	          prof.out <- prof.temp
@@ -1269,7 +1271,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	        }
 	        prof <- prof.out
 	      }
-	      if(!dosage | (is.na(dos.path.to.lists) & is.na(dos.list.file))){			
+	      if(!dosage | (is.na(dos.path.to.lists) & is.na(dos.list.file))){
 	        ## Default - no fastscore
 	        prof <- read.table(paste(reduced.list[i], sep = ""), head  =T)
 	        prof <- prof[,c("IID", "PHENO", "SCORE")]
@@ -1277,7 +1279,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      if(ext.phen){
 	        prof <- subset(prof, select=-c(PHENO))
 	        prof <- merge(x = prof, by.x = "IID", y = pheno.data, by.y = "V1")
-	      } 
+	      }
 	      if(length(levels(as.factor(prof$PHENO)) )< 2 & !ext.phen){
 	        cat("ERROR: Phenotype does not have more than one level. Will not perform regression \n")
 	        no.regression <- T
@@ -1292,7 +1294,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            coefficient[i]  <- summary(model.logit)$coefficients[2,1]
 	            s.err[i] <- summary(model.logit)$coefficients[2,2]
 	          }
-		      r2.out[i] <- (1 - (sum( (prof$V2-predict(model.logit))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  - (1 - ( sum( (prof$V2-predict(model.null))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  
+		      r2.out[i] <- (1 - (sum( (prof$V2-predict(model.logit))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  - (1 - ( sum( (prof$V2-predict(model.null))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )
 		    }
 		    if(covary & !ext.phen){
 	          prof <- merge(x = prof, by.x = "IID", y = pcs, by.y = "IID")
@@ -1303,7 +1305,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            coefficient[i]  <- summary(model.logit)$coefficients[2,1]
 	            s.err[i] <- summary(model.logit)$coefficients[2,2]
 	          }
-	         r2.out[i] <- (1 - ( sum( (prof$PHENO-predict(model.logit))^2 ) / sum( (prof$PHENO-mean(prof$PHENO))^2 ) ) )  - (1 - ( sum( (prof$PHENO-predict(model.null))^2 ) / sum( (prof$PHENO-mean(prof$PHENO))^2 ) ) ) 
+	         r2.out[i] <- (1 - ( sum( (prof$PHENO-predict(model.logit))^2 ) / sum( (prof$PHENO-mean(prof$PHENO))^2 ) ) )  - (1 - ( sum( (prof$PHENO-predict(model.null))^2 ) / sum( (prof$PHENO-mean(prof$PHENO))^2 ) ) )
 	        }
 	        if(!covary & ext.phen){
 	          p.out[i]  <- summary(with(prof, glm(V2  ~ SCORE, family="gaussian")))$coefficients[2,4]
@@ -1311,7 +1313,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            coefficient[i]  <- summary(with(prof, glm(V2  ~ SCORE, family="gaussian")))$coefficients[2,1]
 	            s.err[i] <- summary(with(prof, glm(V2  ~ SCORE, family="gaussian")))$coefficients[2,2]
 	          }
-	          r2.out[i] <-  1 - (sum( (prof$V2-predict(with(prof, glm(V2 ~ SCORE, family="gaussian"))))^2 )/sum( (prof$V2-mean(prof$V2))^2))   			
+	          r2.out[i] <-  1 - (sum( (prof$V2-predict(with(prof, glm(V2 ~ SCORE, family="gaussian"))))^2 )/sum( (prof$V2-mean(prof$V2))^2))
 	        }
 	        if(!covary & !ext.phen){
 	          p.out[i]  <- summary(with(prof, glm(PHENO  ~ SCORE, family="gaussian")))$coefficients[2,4]
@@ -1319,7 +1321,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            coefficient[i]  <- summary(with(prof, glm(PHENO  ~ SCORE, family="gaussian")))$coefficients[2,1]
 	            s.err[i] <- summary(with(prof, glm(PHENO  ~ SCORE, family="gaussian")))$coefficients[2,2]
 	          }
-	          r2.out[i] <- 1 - (sum( (prof$PHENO-predict(with(prof, glm(PHENO ~ SCORE, family="gaussian"))))^2 )/sum( (prof$PHENO-mean(prof$PHENO))^2 )) 
+	          r2.out[i] <- 1 - (sum( (prof$PHENO-predict(with(prof, glm(PHENO ~ SCORE, family="gaussian"))))^2 )/sum( (prof$PHENO-mean(prof$PHENO))^2 ))
 	        }
 	      }
 	      prof.red <- prof[,c("IID","SCORE")]
@@ -1329,29 +1331,29 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          prof.all.scores <- prof.red
 	        }
 	        if(i > 1){
-	          prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")    
+	          prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")
 	        }
 	      }
-	      nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]  
+	      nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]
 	      if(i %in% (seq(1, length(lists$V1), 1)[seq(1, length(lists$V1), 1) %in% ceiling(length(lists$V1)*seq(0, 1,0.1))] )){
 	        cat(paste("Regression Models: " ,round(100*(i/length(lists$V1)),digits=-1), "% Complete \n",sep=""))
 	      }
           if(calculate.abc.r2){
           	abc.r2[i] <- estimateVg2FromP(prevalence1=prevalence1,
           	  prevalence2=prevalence2,
-          	  n1=n1, 
-          	  sampling1= sampling1, 
-          	  n2= n2, 
-          	  sampling2= sampling2, 
-          	  nsnp= nsnps[i], 
-          	  plower = 0, 
-          	  pupper = lists$V1[i], 
-          	  binary=binary.target, 
+          	  n1=n1,
+          	  sampling1= sampling1,
+          	  n2= n2,
+          	  sampling2= sampling2,
+          	  nsnp= nsnps[i],
+          	  plower = 0,
+          	  pupper = lists$V1[i],
+          	  binary=binary.target,
           	  p=p.out[i],
           	  nullfraction=pi0
           	)$vg
           }
-	      
+
 	    }
 	  }
 	}
@@ -1386,7 +1388,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	              names(prof.temp) <- c("temp.IID", "temp.SCORE","temp.PHENO")
 	              if(prev.files){
 	                prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	                prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	                prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	                prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	              }
 	              prof.out <- prof.temp
@@ -1403,18 +1405,18 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	              names(prof.temp) <- c("temp.IID", "temp.SCORE","temp.PHENO")
 	              if(prev.files){
 	                prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	                prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	                prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	                prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	              }
 	              prof.out <- prof.temp
 	              names(prof.out) <- c("IID","SCORE","PHENO")
 	              prof <- prof.out
-	              prev.files <- T         
+	              prev.files <- T
 	            }
 	          prev.files <- F
 	          }
 	        }
-	        if((!dosage & !geno.as.list)  | (dosage & is.na(dos.path.to.lists) & is.na(dos.list.file))){			
+	        if((!dosage & !geno.as.list)  | (dosage & is.na(dos.path.to.lists) & is.na(dos.list.file))){
 		      ## Default - no fastscore
 		      prof <- read.table(paste(reduced.list[i], sep = ""), head  =T)
 	          prof <- prof[,c("IID", "PHENO", "SCORE")]
@@ -1436,7 +1438,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	              coefficient[i]  <- summary(model.logit)$coefficients[2,1]
 	              s.err[i] <- summary(model.logit)$coefficients[2,2]
 	            }
-		        r2.out[i] <- NagelkerkeR2(model.logit)$R2 - NagelkerkeR2(model.null)$R2  
+		        r2.out[i] <- NagelkerkeR2(model.logit)$R2 - NagelkerkeR2(model.null)$R2
 	          }
 	          if(!covary){
                 prof <- prof[prof$V2 != "" ,]
@@ -1457,7 +1459,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            prof.all.scores <- prof.red
 	          }
 	          if(i > 1){
-	             prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")    
+	             prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")
 	          }
 	        }
 	        nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]
@@ -1467,20 +1469,20 @@ for(basePhen in 1:length(base.phenotypes.names)){
           if(calculate.abc.r2){
           	abc.r2[i] <- estimateVg2FromP(prevalence1=prevalence1,
           	  prevalence2=prevalence2,
-          	  n1=n1, 
-          	  sampling1= sampling1, 
-          	  n2= n2, 
-          	  sampling2= sampling2, 
-          	  nsnp= nsnps[i], 
-          	  plower = 0, 
-          	  pupper = lists$V1[i], 
-          	  binary=binary.target, 
+          	  n1=n1,
+          	  sampling1= sampling1,
+          	  n2= n2,
+          	  sampling2= sampling2,
+          	  nsnp= nsnps[i],
+          	  plower = 0,
+          	  pupper = lists$V1[i],
+          	  binary=binary.target,
           	  p=p.out[i],
           	  nullfraction=pi0
           	)$vg
           }
 	      }
-	    }	
+	    }
 	    ## linear regression on phenotype
 	    if(!binary.target){
 	      for(i in 1:length(lists$V1)){
@@ -1490,7 +1492,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            names(prof.temp) <- c("temp.IID", "temp.SCORE")
 	            if(j > 1){
 	              prof.temp <- merge(x = prof.temp, y = prof.out, by.x = "temp.IID", by.y = "IID")
-	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE    
+	              prof.temp$SCORE <- prof.temp$SCORE + prof.temp$temp.SCORE
 	              prof.temp <- prof.temp[,c("IID", "SCORE","PHENO")]
 	            }
 	            prof.out <- prof.temp
@@ -1498,7 +1500,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          }
 	          prof <- prof.out
 	        }
-	        if(!dosage | (is.na(dos.path.to.lists) & is.na(dos.list.file))){			
+	        if(!dosage | (is.na(dos.path.to.lists) & is.na(dos.list.file))){
 	          ## Default - no fastscore
 	          prof <- read.table(paste(reduced.list[i], sep = ""), head  =T)
 	          prof <- prof[,c("IID", "PHENO", "SCORE")]
@@ -1519,7 +1521,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	              coefficient[i]  <- summary(model.logit)$coefficients[2,1]
 	              s.err[i] <- summary(model.logit)$coefficients[2,2]
 	            }
-		        r2.out[i] <- (1 - (sum( (prof$V2-predict(model.logit))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  - (1 - ( sum( (prof$V2-predict(model.null))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  
+		        r2.out[i] <- (1 - (sum( (prof$V2-predict(model.logit))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )  - (1 - ( sum( (prof$V2-predict(model.null))^2 ) / sum( (prof$V2-mean(prof$V2))^2 ) ) )
 		      }
 	          if(!covary){
                 prof <- prof[prof$V2 != "" ,]
@@ -1529,7 +1531,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	              coefficient[i]  <- summary(with(prof, glm(V2  ~ SCORE, family="gaussian")))$coefficients[2,1]
 	              s.err[i] <- summary(with(prof, glm(V2  ~ SCORE, family="gaussian")))$coefficients[2,2]
 	            }
-	            r2.out[i] <-  1 - (sum( (prof$V2-predict(with(prof, glm(V2 ~ SCORE, family="gaussian"))))^2 )/sum( (prof$V2-mean(prof$V2))^2))   			
+	            r2.out[i] <-  1 - (sum( (prof$V2-predict(with(prof, glm(V2 ~ SCORE, family="gaussian"))))^2 )/sum( (prof$V2-mean(prof$V2))^2))
 	          }
 	        }
 	        prof.red <- prof[,c("IID","SCORE")]
@@ -1539,24 +1541,24 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            prof.all.scores <- prof.red
 	          }
 	          if(i > 1){
-	            prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")    
+	            prof.all.scores <- merge(x = prof.all.scores, by.x = "IID", y = prof.red, by.y = "IID")
 	          }
 	        }
-	        nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]  
+	        nsnps[i] <- dim(ranges.list[ranges.list$V2 < lists$V1[i],])[1]
 	        if(i %in% (seq(1, length(lists$V1), 1)[seq(1, length(lists$V1), 1) %in% ceiling(length(lists$V1)*seq(0, 1,0.1))] )){
 	          cat(paste("Regression Models: " ,round(100*(i/length(lists$V1)),digits=-1), "% Complete \n",sep=""))
 	        }
           if(calculate.abc.r2){
           	abc.r2[i] <- estimateVg2FromP(prevalence1=prevalence1,
           	  prevalence2=prevalence2,
-          	  n1=n1, 
-          	  sampling1= sampling1, 
-          	  n2= n2, 
-          	  sampling2= sampling2, 
-          	  nsnp= nsnps[i], 
-          	  plower = 0, 
-          	  pupper = lists$V1[i], 
-          	  binary=binary.target, 
+          	  n1=n1,
+          	  sampling1= sampling1,
+          	  n2= n2,
+          	  sampling2= sampling2,
+          	  nsnp= nsnps[i],
+          	  plower = 0,
+          	  pupper = lists$V1[i],
+          	  binary=binary.target,
           	  p=p.out[i],
           	  nullfraction=pi0
           	)$vg
@@ -1565,7 +1567,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    }
 	    top.thresh[k] <- lists$V1[which.min(p.out)]
 	    top.thresh.pval[k] <- p.out[which.min(p.out)]
-	    thresh <- lists$V1 
+	    thresh <- lists$V1
         if(!calculate.abc.r2){
 	      if(!for.meta){
 	        output <- data.frame(thresh, p.out, r2.out, nsnps)
@@ -1604,17 +1606,17 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    }
 	  }
 	  ## end of loop through target phenotypes
-	if(!multiple.base.phenotypes){  
+	if(!multiple.base.phenotypes){
     	write.table(data.frame(target.phenotypes, target.phenotypes.binary, top.thresh, top.thresh.pval), paste(figname, "TOP_SCORES_ACROSS_PHENOTYPES.txt",sep="_"),
 	  col.names=T, row.names=F, quote=F)
-    }	
-	if(multiple.base.phenotypes){  
+    }
+	if(multiple.base.phenotypes){
     	write.table(data.frame(target.phenotypes, target.phenotypes.binary, top.thresh, top.thresh.pval), paste(figname, base.phenotypes.names[basePhen], "PREDICTING_TOP_SCORES_ACROSS_TARGET_PHENOTYPES.txt",sep="_"),
 	  col.names=T, row.names=F, quote=F)
-    }	
+    }
 
   }
-  
+
 
 	if(no.regression & !multiple.target.phenotypes){
 	  if(report.individual.scores & !multiple.base.phenotypes){
@@ -1625,14 +1627,14 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  }
 	  if(cleanup){
 	    cat(" ################################# \n # \n #   Cleanup \n # \n ################################# \n")
-	    system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
@@ -1642,23 +1644,23 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("rm PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S5*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S6*.profile", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm *PROFILES.S6*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S7*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm flip*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm clean*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm profile_list", ignore.stdout=T,ignore.stderr=T)
@@ -1678,18 +1680,18 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("rm PROFILES.hh", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.log", ignore.stdout=T,ignore.stderr=T)
 	    system("rm synonymous_snps*", ignore.stdout=T,ignore.stderr=T)
-	    system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T)
 	    system("rm non_synonymous_snps_only*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm mhc.txt", ignore.stdout=T,ignore.stderr=T)
 	    system("rm Rplots.pdf", ignore.stdout=T,ignore.stderr=T)
 	    system("rm temp.raw", ignore.stdout=T,ignore.stderr=T)
 	    system("rm TARGET_SNPs", ignore.stdout=T,ignore.stderr=T)
-	    system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)  
+	    system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)
 	  }
 	  if(print.time){
 	    cat(" ################################# \n # \n #   Print time \n # \n ################################# \n")
 	  }
-	  running.time <- proc.time()[3] - start.time 
+	  running.time <- proc.time()[3] - start.time
 	  if(running.time < 60){
 	    out.run.time <- round(running.time, digits = 2)
 	    out.time.units <- "seconds"
@@ -1707,9 +1709,9 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  }
 	  quit()
 	}
-	
+
 	if(!multiple.target.phenotypes){
-	  thresh <- lists$V1 
+	  thresh <- lists$V1
         if(!calculate.abc.r2){
 	      if(!for.meta){
 	        output <- data.frame(thresh, p.out, r2.out, nsnps)
@@ -1732,7 +1734,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  if(multiple.base.phenotypes){
   	    write.table(output, paste(figname,base.phenotypes.names[basePhen], "RAW_RESULTS_DATA.txt", sep = "_"), col.names = T, row.names = F, quote  =F)
   	  }
-  	  
+
 	  if(report.individual.scores){
 	    if(!report.best.score.only & !multiple.base.phenotypes){
 	      write.table(prof.all.scores, paste(figname, "SCORES_AT_ALL_THRESHOLDS.txt", sep = "_"), col.names = T, row.names = F, quote = F)
@@ -1748,7 +1750,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    }
 	  }
 	}
-    
+
 	if(!multiple.base.phenotypes){
 	  if(!multiple.target.phenotypes){
             if(quantiles & ggfig){
@@ -1777,24 +1779,24 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ quantiles, family="binomial", data = for.quantiles))$coefficients[1:num.quantiles,2]))
           ci.quantiles.l <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ quantiles, family="binomial", data = for.quantiles))$coefficients[1:num.quantiles,2]))
         }
-        or.quantiles[1] <- 1 
+        or.quantiles[1] <- 1
         ci.quantiles.u[1] <- 1
         ci.quantiles.l[1] <- 1
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(or.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("OR", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Odds Ratio for Score on Phenotype") + 
-          xlab("Quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Odds Ratio for Score on Phenotype") +
+          xlab("Quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       if(!binary.target){
         if(report.individual.scores & !report.best.score.only){
           scores.internal <- prof.all.scores[,c("IID", paste("pT", output$thresh[which.min(output$p.out)],sep="_"))]
@@ -1818,27 +1820,27 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
           ci.quantiles.l <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
         }
-        coef.quantiles[1] <- 0 
+        coef.quantiles[1] <- 0
         ci.quantiles.u[1] <- 0
         ci.quantiles.l[1] <- 0
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(coef.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("Coef", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Change in Phenotype given score in quantiles") + 
-          xlab("Quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Change in Phenotype given score in quantiles") +
+          xlab("Quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       quantiles.plot
-      ggsave(paste(figname, "QUANTILES_PLOT.png", sep = "_"))  
-    }	
+      ggsave(paste(figname, "QUANTILES_PLOT.png", sep = "_"))
+    }
 
 	    if(!fastscore){
 	      cat(" ################################# \n # \n #   High Density Plots \n # \n ################################# \n")
@@ -1847,7 +1849,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    if(best.thresh.on.bar){
 	      #add max thresh
 	      barchart.levels <- c(barchart.levels, output$thresh[which.min(output$p.out)])
-	      barchart.levels <- barchart.levels[!duplicated(barchart.levels)]	
+	      barchart.levels <- barchart.levels[!duplicated(barchart.levels)]
 	      barchart.levels <- sort(barchart.levels, decreasing = F)
 	    }
 	    if(!fastscore & !ggfig){
@@ -1872,7 +1874,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          type = "b"
 	        ))
 	        with(output[output$thresh %in% barchart.levels.old,], points(thresh, r2.out, col = "green", pch = 19, type= "b"))
-	      }	
+	      }
 	      dev.off()
 	    }
 	    if(!fastscore & ggfig){
@@ -1884,8 +1886,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          geom_line(aes(thresh,  -log10(p.out)), colour = "green",
 	          subset = .(thresh %in% barchart.levels.old))  +
 	          geom_point(aes(thresh,  -log10(p.out)), colour = "green",
-	          subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
 	        ggfig.points
 	        ggsave(paste(figname,"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
@@ -1897,8 +1899,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          geom_line(aes(thresh,  r2.out), colour = "green",
 	          subset = .(thresh %in% barchart.levels.old))  +
 	          geom_point(aes(thresh,  r2.out), colour = "green",
-	          subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -1913,7 +1915,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
     }
 	        ggfig.points
 	        ggsave(paste(figname,"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
-	      }	 
+	      }
 	    }
 	    options(scipen=0,digits=7)
 	    output <- read.table(paste(figname, "RAW_RESULTS_DATA.txt", sep = "_"),head=T)
@@ -1926,13 +1928,13 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    cat(" ################################# \n # \n #   Barplots \n # Bars for inclusion can be changed using the barchart.levels option \n ################################# \n")
 	    if(ggfig){
 	      if(!bar.col.is.pval){
-	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + xlab(expression(italic(P)-value~threshold~(italic(P)[T])))   
+	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	            }
 	      if(bar.col.is.pval){
 	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +  xlab(expression(italic(P)-value~threshold~(italic(P)[T]))) 	      }
 	      ggfig.plot <- ggfig.plot + geom_text(aes(x = factor(thresh), y = r2.out, label = paste(print.p)), vjust = -1.5, hjust = 0, angle = 45, cex = 2.8, parse=T) +
 	        scale_y_continuous(limits = c(0, max(output$r2.out)*1.25)) +
-	         theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	         theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -1946,21 +1948,21 @@ for(basePhen in 1:length(base.phenotypes.names)){
               ggfig.plot <- ggfig.plot + ylab(expression(paste("PRS model fit:  ",R^2)))
             }
 	        ggfig.plot
-	        ggsave(paste(figname, "_BARPLOT_", Sys.Date(), ".png", sep = ""))		
-	    }  
+	        ggsave(paste(figname, "_BARPLOT_", Sys.Date(), ".png", sep = ""))
+	    }
 	    if(!ggfig) {
 	      png(paste(figname, "_BARPLOT_", Sys.Date(), ".png", sep = ""))
-	      plot.fig  <- with(output, barplot(r2.out, 
+	      plot.fig  <- with(output, barplot(r2.out,
 	        names = thresh,
-	        main = "", 
+	        main = "",
 	        col = "red",
 	        xlab = expression(italic(P)[T]),
 	        ylab = expression(R^2),
 	        ylim = c(0,  max(output$r2.out)*1.25)  ))
 	        text( parse(text=paste(
-	        output$print.p)), 
-	        x = plot.fig+0.1, 
-	        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+	        output$print.p)),
+	        x = plot.fig+0.1,
+	        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
 	        srt = 45)
 	      dev.off()
 	    }
@@ -1968,7 +1970,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	  if(multiple.target.phenotypes){
 	    for(k in 1:length(target.phenotypes)){
 	      output <- read.table(paste(figname, target.phenotypes[k], "RAW_RESULTS_DATA.txt", sep = "_"), head=T)
-	      
+
 	          if(quantiles & ggfig){
     cat(" ################################# \n # \n #   Quantiles Plots \n # \n ################################# \n")
       if(binary.target){
@@ -1995,24 +1997,24 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
           ci.quantiles.l <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
         }
-        or.quantiles[1] <- 1 
+        or.quantiles[1] <- 1
         ci.quantiles.u[1] <- 1
         ci.quantiles.l[1] <- 1
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(or.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("OR", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Odds Ratio for Score on Phenotype") + 
-          xlab("quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Odds Ratio for Score on Phenotype") +
+          xlab("quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       if(!binary.target){
         if(report.individual.scores & !report.best.score.only){
           scores.internal <- prof.all.scores[,c("IID", paste("pT", output$thresh[which.min(output$p.out)],sep="_"))]
@@ -2036,29 +2038,29 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
           ci.quantiles.l <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
         }
-        coef.quantiles[1] <- 0 
+        coef.quantiles[1] <- 0
         ci.quantiles.u[1] <- 0
         ci.quantiles.l[1] <- 0
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(coef.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("Coef", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Change in Phenotype given score in quantiles") + 
-          xlab("Quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Change in Phenotype given score in quantiles") +
+          xlab("Quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       quantiles.plot
-      ggsave(paste(figname,target.phenotypes[k], "QUANTILES_PLOT.png", sep = "_"))  
-    }	
+      ggsave(paste(figname,target.phenotypes[k], "QUANTILES_PLOT.png", sep = "_"))
+    }
 
-	      
+
 	      if(!fastscore){
 	        cat(" ################################# \n # \n #   High Density Plots \n # \n ################################# \n")
 	      }
@@ -2066,7 +2068,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      if(best.thresh.on.bar){
 	        #add max thresh
 	        barchart.levels <- c(barchart.levels, output$thresh[which.min(output$p.out)])
-	        barchart.levels <- barchart.levels[!duplicated(barchart.levels)]	
+	        barchart.levels <- barchart.levels[!duplicated(barchart.levels)]
 	        barchart.levels <- sort(barchart.levels, decreasing = F)
 	      }
 	      if(!fastscore & !ggfig){
@@ -2091,9 +2093,9 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            type = "b"
 	          ))
 	          with(output[output$thresh %in% barchart.levels.old,], points(thresh, r2.out, col = "green", pch = 19, type= "b"))
-	        }	
+	        }
 	        dev.off()
-	       }  
+	       }
 	      if(!fastscore & ggfig){
 	        if(!scatter.R2){
 	          ggfig.points <- ggplot(data = output) + geom_point(aes(x = thresh, y = -log10(p.out))) +
@@ -2103,8 +2105,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            geom_line(aes(thresh,  -log10(p.out)), colour = "green",
 	            subset = .(thresh %in% barchart.levels.old))  +
 	            geom_point(aes(thresh,  -log10(p.out)), colour = "green",
-	            subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	            subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
 	          ggfig.points
 	          ggsave(paste(figname,"_",target.phenotypes[k],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
@@ -2116,8 +2118,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            geom_line(aes(thresh,  r2.out), colour = "green",
 	            subset = .(thresh %in% barchart.levels.old))  +
 	            geom_point(aes(thresh,  r2.out), colour = "green",
-	            subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	            subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2132,7 +2134,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
               }
 	          ggfig.points
 	          ggsave(paste(figname,"_",target.phenotypes[k],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
-	        }	 
+	        }
 	      }
 	      options(scipen=0,digits=7)
 	      #output <- read.table(paste(figname, "RAW_RESULTS_DATA.txt", sep = "_"),head=T)
@@ -2145,14 +2147,14 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      cat(" ################################# \n # \n #   Barplots \n # Bars for inclusion can be changed using the barchart.levels option \n ################################# \n")
 	      if(ggfig){
 	        if(!bar.col.is.pval){
-	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	        }
 	        if(bar.col.is.pval){
-	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +  xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +  xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	        }
 	        ggfig.plot <- ggfig.plot + geom_text(aes(x = factor(thresh), y = r2.out, label = paste(print.p)), vjust = -1.5, hjust = 0, angle = 45, cex = 2.8, parse=T) +
-	          scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2166,21 +2168,21 @@ for(basePhen in 1:length(base.phenotypes.names)){
       ggfig.plot <- ggfig.plot + ylab(expression(paste("PRS model fit:  ",R^2)))
     }
 	          ggfig.plot
-	          ggsave(paste(figname,"_",target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))		
-	      }  
+	          ggsave(paste(figname,"_",target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
+	      }
 	      if(!ggfig) {
 	        png(paste(figname,"_",target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
-	        plot.fig  <- with(output, barplot(r2.out, 
+	        plot.fig  <- with(output, barplot(r2.out,
 	          names = thresh,
-	          main = "", 
+	          main = "",
 	          col = "red",
 	          xlab = expression(italic(P)[T]),
 	          ylab = expression(R^2),
 	          ylim = c(0,  max(output$r2.out)*1.25)  ))
 	          text( parse(text=paste(
-	          output$print.p)), 
-	          x = plot.fig+0.1, 
-	          y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+	          output$print.p)),
+	          x = plot.fig+0.1,
+	          y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
 	          srt = 45)
 	        dev.off()
 	      }
@@ -2216,24 +2218,24 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
           ci.quantiles.l <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
         }
-        or.quantiles[1] <- 1 
+        or.quantiles[1] <- 1
         ci.quantiles.u[1] <- 1
         ci.quantiles.l[1] <- 1
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(or.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("OR", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Odds Ratio for Score on Phenotype") + 
-          xlab("quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Odds Ratio for Score on Phenotype") +
+          xlab("quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       if(!binary.target){
         if(report.individual.scores & !report.best.score.only){
           scores.internal <- prof.all.scores[,c("IID", paste("pT", output$thresh[which.min(output$p.out)],sep="_"))]
@@ -2257,27 +2259,27 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
           ci.quantiles.l <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
         }
-        coef.quantiles[1] <- 0 
+        coef.quantiles[1] <- 0
         ci.quantiles.u[1] <- 0
         ci.quantiles.l[1] <- 0
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(coef.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("Coef", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Change in Phenotype given score in quantiles") + 
-          xlab("quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Change in Phenotype given score in quantiles") +
+          xlab("quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       quantiles.plot
-      ggsave(paste(figname, base.phenotypes.names[basePhen],"QUANTILES_PLOT.png", sep = "_"))  
-    }	
+      ggsave(paste(figname, base.phenotypes.names[basePhen],"QUANTILES_PLOT.png", sep = "_"))
+    }
 
 	    if(!fastscore){
 	      cat(" ################################# \n # \n #   High Density Plots \n # \n ################################# \n")
@@ -2286,7 +2288,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    if(best.thresh.on.bar){
 	      #add max thresh
 	      barchart.levels <- c(barchart.levels, output$thresh[which.min(output$p.out)])
-	      barchart.levels <- barchart.levels[!duplicated(barchart.levels)]	
+	      barchart.levels <- barchart.levels[!duplicated(barchart.levels)]
 	      barchart.levels <- sort(barchart.levels, decreasing = F)
 	    }
 	    if(!fastscore & !ggfig){
@@ -2311,7 +2313,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          type = "b"
 	        ))
 	        with(output[output$thresh %in% barchart.levels.old,], points(thresh, r2.out, col = "green", pch = 19, type= "b"))
-	      }	
+	      }
 	      dev.off()
 	    }
 	    if(!fastscore & ggfig){
@@ -2323,8 +2325,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          geom_line(aes(thresh,  -log10(p.out)), colour = "green",
 	          ,subset = .(thresh %in% barchart.levels.old))  +
 	          geom_point(aes(thresh,  -log10(p.out)), colour = "green",
-	          ,subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          ,subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
 	        ggfig.points
 	        ggsave(paste(figname,"_",base.phenotypes.names[basePhen],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
@@ -2336,8 +2338,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	          geom_line(aes(thresh,  r2.out), colour = "green",
 	          ,subset = .(thresh %in% barchart.levels.old))  +
 	          geom_point(aes(thresh,  r2.out), colour = "green",
-	          ,subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          ,subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2352,7 +2354,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
             }
 	        ggfig.points
 	        ggsave(paste(figname,"_",base.phenotypes.names[basePhen],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
-	      }	 
+	      }
 	    }
 	    options(scipen=0,digits=7)
 	    output <- read.table(paste(figname,base.phenotypes.names[basePhen], "RAW_RESULTS_DATA.txt", sep = "_"),head=T)
@@ -2365,13 +2367,13 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    cat(" ################################# \n # \n #   Barplots \n # Bars for inclusion can be changed using the barchart.levels option \n ################################# \n")
 	    if(ggfig){
 	      if(!bar.col.is.pval){
-	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	      }
 	      if(bar.col.is.pval){
 	        ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +  xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  	      }
 	      ggfig.plot <- ggfig.plot + geom_text(aes(x = factor(thresh), y = r2.out, label = paste(print.p)), vjust = -1.5, hjust = 0, angle = 45, cex = 2.8, parse=T) +
-	        scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	        scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2385,21 +2387,21 @@ for(basePhen in 1:length(base.phenotypes.names)){
               ggfig.plot <- ggfig.plot + ylab(expression(paste("PRS model fit:  ",R^2)))
             }
 	        ggfig.plot
-	        ggsave(paste(figname,"_",base.phenotypes.names[basePhen],"_BARPLOT_", Sys.Date(), ".png", sep = ""))		
-	    }  
+	        ggsave(paste(figname,"_",base.phenotypes.names[basePhen],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
+	    }
 	    if(!ggfig) {
 	      png(paste(figname,"_",base.phenotypes.names[basePhen],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
-	      plot.fig  <- with(output, barplot(r2.out, 
+	      plot.fig  <- with(output, barplot(r2.out,
 	        names = thresh,
-	        main = "", 
+	        main = "",
 	        col = "red",
 	        xlab = expression(italic(P)[T]),
 	        ylab = expression(R^2),
 	        ylim = c(0,  max(output$r2.out)*1.25)  ))
 	        text( parse(text=paste(
-	        output$print.p)), 
-	        x = plot.fig+0.1, 
-	        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+	        output$print.p)),
+	        x = plot.fig+0.1,
+	        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
 	        srt = 45)
 	      dev.off()
 	    }
@@ -2433,24 +2435,24 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
           ci.quantiles.l <- exp(summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="binomial", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2]))
         }
-        or.quantiles[1] <- 1 
+        or.quantiles[1] <- 1
         ci.quantiles.u[1] <- 1
         ci.quantiles.l[1] <- 1
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(or.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("OR", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Odds Ratio for Score on Phenotype") + 
-          xlab("quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = OR), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = OR, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Odds Ratio for Score on Phenotype") +
+          xlab("quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       if(!binary.target){
         if(report.individual.scores & !report.best.score.only){
           scores.internal <- prof.all.scores[,c("IID", paste("pT", output$thresh[which.min(output$p.out)],sep="_"))]
@@ -2474,27 +2476,27 @@ for(basePhen in 1:length(base.phenotypes.names)){
           ci.quantiles.u <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] + (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
           ci.quantiles.l <- summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,1] - (1.96*summary(glm(PHEN ~ ., family="gaussian", data = for.quantiles[,c("PHEN","quantiles",covariates)]))$coefficients[1:num.quantiles,2])
         }
-        coef.quantiles[1] <- 0 
+        coef.quantiles[1] <- 0
         ci.quantiles.u[1] <- 0
         ci.quantiles.l[1] <- 0
         quant.list <- seq(1, num.quantiles, 1)
-        quant.list <- quant.list[quant.list != quant.ref]     
+        quant.list <- quant.list[quant.list != quant.ref]
         quantiles.for.table <- c(quant.ref, quant.list)
         quantiles.df <- data.frame(coef.quantiles, ci.quantiles.u, ci.quantiles.l, quantiles.for.table)
         names(quantiles.df) <- c("Coef", "CI.U", "CI.L", "DEC")
         quantiles.df <- quantiles.df[order(quantiles.df$DEC),]
-        quantiles.plot <- ggplot(quantiles.df) + 
-          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) + 
-          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
-          axis.line = element_line(colour = "black",size=0.5)) + 
-          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) + 
-          ylab("Change in Phenotype given score in quantiles") + 
-          xlab("quantiles for Polygenic Score") + 
-          scale_x_continuous(breaks=seq(0, num.quantiles, 1))   
-        }  
+        quantiles.plot <- ggplot(quantiles.df) +
+          geom_point(aes(x = DEC, y = Coef), colour = "royalblue2", size=4) +
+          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
+          axis.line = element_line(colour = "black",size=0.5)) +
+          geom_pointrange(aes(ymin = CI.L,ymax = CI.U, y = Coef, x = DEC), colour = "royalblue2", size = 0.9) +
+          ylab("Change in Phenotype given score in quantiles") +
+          xlab("quantiles for Polygenic Score") +
+          scale_x_continuous(breaks=seq(0, num.quantiles, 1))
+        }
       quantiles.plot
-      ggsave(paste(figname,base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k], "QUANTILES_PLOT.png", sep = "_"))  
-    }	
+      ggsave(paste(figname,base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k], "QUANTILES_PLOT.png", sep = "_"))
+    }
 
 	      if(!fastscore){
 	        cat(" ################################# \n # \n #   High Density Plots \n # \n ################################# \n")
@@ -2503,7 +2505,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      if(best.thresh.on.bar){
 	        #add max thresh
 	        barchart.levels <- c(barchart.levels, output$thresh[which.min(output$p.out)])
-	        barchart.levels <- barchart.levels[!duplicated(barchart.levels)]	
+	        barchart.levels <- barchart.levels[!duplicated(barchart.levels)]
 	        barchart.levels <- sort(barchart.levels, decreasing = F)
 	      }
 	      if(!fastscore & !ggfig){
@@ -2528,9 +2530,9 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            type = "b"
 	          ))
 	          with(output[output$thresh %in% barchart.levels.old,], points(thresh, r2.out, col = "green", pch = 19, type= "b"))
-	        }	
+	        }
 	        dev.off()
-	       }  
+	       }
 	      if(!fastscore & ggfig){
 	        if(!scatter.R2){
 	          ggfig.points <- ggplot(data = output) + geom_point(aes(x = thresh, y = -log10(p.out))) +
@@ -2540,8 +2542,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            geom_line(aes(thresh,  -log10(p.out)), colour = "green",
 	            subset = .(thresh %in% barchart.levels.old))  +
 	            geom_point(aes(thresh,  -log10(p.out)), colour = "green",
-	            subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	            subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
 	          ggfig.points
 	          ggsave(paste(figname,"_",base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
@@ -2553,8 +2555,8 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	            geom_line(aes(thresh,  r2.out), colour = "green",
 	            subset = .(thresh %in% barchart.levels.old))  +
 	            geom_point(aes(thresh,  r2.out), colour = "green",
-	            subset = .(thresh %in% barchart.levels.old))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	            subset = .(thresh %in% barchart.levels.old))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2569,7 +2571,7 @@ for(basePhen in 1:length(base.phenotypes.names)){
               }
 	          ggfig.points
 	          ggsave(paste(figname,"_",base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k],"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
-	        }	 
+	        }
 	      }
 	      options(scipen=0,digits=7)
 	    output <- output[,c(1:3)]
@@ -2581,14 +2583,14 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	      cat(" ################################# \n # \n #   Barplots \n # Bars for inclusion can be changed using the barchart.levels option \n ################################# \n")
 	      if(ggfig){
 	        if(!bar.col.is.pval){
-	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = factor(thresh)), stat="identity") +     scale_fill_brewer(palette=barpalatte, name = expression(italic(P)-value~threshold)) + theme(axis.text.x=element_blank(), axis.title.x=element_blank())  +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	        }
 	        if(bar.col.is.pval){
-	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+	          ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(thresh), y = r2.out, fill = -log10(p.out)), stat="identity") +     scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +   xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
 	        }
 	        ggfig.plot <- ggfig.plot + geom_text(aes(x = factor(thresh), y = r2.out, label = paste(print.p)), vjust = -1.5, hjust = 0, angle = 45, cex = 2.8, parse=T) +
-	          scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	          scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
    if(binary.target){
    	  if(!calculate.abc.r2){
@@ -2602,21 +2604,21 @@ for(basePhen in 1:length(base.phenotypes.names)){
                 ggfig.plot <- ggfig.plot + ylab(expression(paste("PRS model fit:  ",R^2)))
               }
 	          ggfig.plot
-	          ggsave(paste(figname,"_",base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))		
-	      }  
+	          ggsave(paste(figname,"_",base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
+	      }
 	      if(!ggfig) {
 	        png(paste(figname,"_",base.phenotypes.names[basePhen], "PREDICTING", target.phenotypes[k],"_BARPLOT_", Sys.Date(), ".png", sep = ""))
-	        plot.fig  <- with(output, barplot(r2.out, 
+	        plot.fig  <- with(output, barplot(r2.out,
 	          names = thresh,
-	          main = "", 
+	          main = "",
 	          col = "red",
 	          xlab = expression(italic(P)[T]),
 	          ylab = expression(R^2),
 	          ylim = c(0,  max(output$r2.out)*1.25)  ))
 	          text( parse(text=paste(
-	          output$print.p)), 
-	          x = plot.fig+0.1, 
-	          y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+	          output$print.p)),
+	          x = plot.fig+0.1,
+	          y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
 	          srt = 45)
 	        dev.off()
 	      }
@@ -2631,14 +2633,14 @@ for(basePhen in 1:length(base.phenotypes.names)){
   }
   if(multiple.base.phenotypes){
 	    cat(" ################################# \n # \n #   Remove temp files \n # \n ################################# \n")
-	    system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
@@ -2648,23 +2650,23 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("rm PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+	    system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S5*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S6*.profile", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm *PROFILES.S6*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S7*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm *PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
-	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
 	    system("rm flip*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm clean*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm profile_list", ignore.stdout=T,ignore.stderr=T)
@@ -2684,13 +2686,13 @@ for(basePhen in 1:length(base.phenotypes.names)){
 	    system("rm PROFILES.hh", ignore.stdout=T,ignore.stderr=T)
 	    system("rm PROFILES.log", ignore.stdout=T,ignore.stderr=T)
 	    system("rm synonymous_snps*", ignore.stdout=T,ignore.stderr=T)
-	    system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T) 
+	    system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T)
 	    system("rm non_synonymous_snps_only*", ignore.stdout=T,ignore.stderr=T)
 	    system("rm mhc.txt", ignore.stdout=T,ignore.stderr=T)
 	    system("rm Rplots.pdf", ignore.stdout=T,ignore.stderr=T)
 	    system("rm temp.raw", ignore.stdout=T,ignore.stderr=T)
 	    system("rm TARGET_SNPs", ignore.stdout=T,ignore.stderr=T)
-	    system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)  
+	    system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)
     }
 }
 
@@ -2698,12 +2700,12 @@ for(basePhen in 1:length(base.phenotypes.names)){
 if(multiple.base.phenotypes & multiple.target.phenotypes){
   names(out.multibase) <- base.phenotypes.names
   row.names(out.multibase) <- target.phenotypes
-  write.table(out.multibase, paste(figname, "ALL_BEST_THRESHOLDS_BASE_AND_TARGET.txt",sep="_"), col.names=T, row.names=T, quote= F)  
+  write.table(out.multibase, paste(figname, "ALL_BEST_THRESHOLDS_BASE_AND_TARGET.txt",sep="_"), col.names=T, row.names=T, quote= F)
   if(ggfig){
     trans.multibase <- data.frame(Base.Phenotype = rep(colnames(out.multibase), each = nrow(out.multibase)), Target.Phenotype = row.names(out.multibase), PRS.P.value = unlist(-log10(out.multibase)))
     tile.plot <- ggplot(trans.multibase, aes(x = Base.Phenotype, y = Target.Phenotype, fill = PRS.P.value)) + geom_tile() +
       xlab("Base Phenotype") +
-      ylab("Target Phenotype") + 
+      ylab("Target Phenotype") +
       scale_fill_gradient(bquote(atop(Best~-log[10]~model,italic(P)-value),), low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol)
     tile.plot
     ggsave(paste(figname, "_HEATMAP.png", sep=""))
@@ -2719,14 +2721,14 @@ if(multiple.base.phenotypes & multiple.target.phenotypes){
 
 if(cleanup){
 cat(" ################################# \n # \n #   Cleanup \n # \n ################################# \n")
-  system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+  system("rm PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-  system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+  system("rm PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
@@ -2736,14 +2738,14 @@ cat(" ################################# \n # \n #   Cleanup \n # \n ############
   system("rm PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
-  system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)	
+  system("rm *PROFILES.0.5*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.0.4*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.0.3*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.0.2*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.0.1*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.0.0*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.*.profile", ignore.stdout=T,ignore.stderr=T)
-  system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)	
+  system("rm *PROFILES.S1*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S2*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S3*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S4*.profile", ignore.stdout=T,ignore.stderr=T)
@@ -2752,7 +2754,7 @@ cat(" ################################# \n # \n #   Cleanup \n # \n ############
   system("rm *PROFILES.S7*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S8*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm *PROFILES.S9*.profile", ignore.stdout=T,ignore.stderr=T)
-  system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T) 
+  system("rm *PROFILES.S*.profile", ignore.stdout=T,ignore.stderr=T)
   system("rm flip*", ignore.stdout=T,ignore.stderr=T)
   system("rm clean*", ignore.stdout=T,ignore.stderr=T)
   system("rm profile_list", ignore.stdout=T,ignore.stderr=T)
@@ -2772,13 +2774,13 @@ cat(" ################################# \n # \n #   Cleanup \n # \n ############
   system("rm PROFILES.hh", ignore.stdout=T,ignore.stderr=T)
   system("rm PROFILES.log", ignore.stdout=T,ignore.stderr=T)
   system("rm synonymous_snps*", ignore.stdout=T,ignore.stderr=T)
-  system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T) 
+  system("rm synonymous_snps", ignore.stdout=T,ignore.stderr=T)
   system("rm non_synonymous_snps_only*", ignore.stdout=T,ignore.stderr=T)
   system("rm mhc.txt", ignore.stdout=T,ignore.stderr=T)
   system("rm Rplots.pdf", ignore.stdout=T,ignore.stderr=T)
   system("rm temp.raw", ignore.stdout=T,ignore.stderr=T)
   system("rm TARGET_SNPs", ignore.stdout=T,ignore.stderr=T)
-  system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)  
+  system("rm base_SNPS", ignore.stdout=T,ignore.stderr=T)
 }
 
 
@@ -2797,7 +2799,7 @@ slower <- slower+sinc
 
 library(gtx)
 if(ggfig){
-  library(ggplot2)  
+  library(ggplot2)
   library(plyr)
 }
 options(stringsAsFactors=F)
@@ -2821,8 +2823,8 @@ system(paste("head -n +1 ", target, " > head.targ"))
 base.names <- read.table("head.base",head=T)
 targ.names <- read.table("head.targ",head=T)
 
-system(paste("tail -n +2 ", base, " | awk '{print $", which(colnames(base.names) == "SNP"), "}' | sort -k1,1 > base_snps",sep="")) 
-system(paste("tail -n +2 ", target, " | awk '{print $", which(colnames(targ.names) == "SNP"), "}' | sort -k1,1 > targ_snps",sep="")) 
+system(paste("tail -n +2 ", base, " | awk '{print $", which(colnames(base.names) == "SNP"), "}' | sort -k1,1 > base_snps",sep=""))
+system(paste("tail -n +2 ", target, " | awk '{print $", which(colnames(targ.names) == "SNP"), "}' | sort -k1,1 > targ_snps",sep=""))
 system(paste("join -1 1 -2 1 clump_panel_snps.txt base_snps | join -1 1 -2 1 ``-'' targ_snps > clean_snps", sep = ""))
 
 
@@ -2950,8 +2952,8 @@ if(ggfig){
 	            geom_line(aes(high.res,  -log10(pval.out)), colour = "green",
 	            subset = .(high.res %in% barchart.levels))  +
 	            geom_point(aes(high.res,  -log10(pval.out)), colour = "green",
-	            subset = .(high.res %in% barchart.levels))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+	            subset = .(high.res %in% barchart.levels))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
 	          ggfig.points
 	          ggsave(paste(figname,"_HIGH-RES_PLOT_", Sys.Date(), ".png", sep = ""))
@@ -2983,50 +2985,50 @@ output$print.p[round(output$pval.out, digits = 3) != 0] <- round(output$pval.out
 output$print.p[round(output$pval.out, digits = 3) == 0] <- format(output$pval.out[round(output$pval.out, digits = 3) == 0], digits=2)
 output$print.p <- sub("e", "*x*10^", output$print.p)
 if(ggfig){
-  ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(high.res), y = r2.out, fill = -log10(pval.out)), stat="identity") +     
-  scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +  
-  xlab(expression(italic(P)-value~threshold~(italic(P)[T])))  
+  ggfig.plot <-   ggplot(data = output)  + geom_bar(aes(x = factor(high.res), y = r2.out, fill = -log10(pval.out)), stat="identity") +
+  scale_fill_gradient(low= bar.col.is.pval.lowcol, high= bar.col.is.pval.highcol, name =bquote(atop(-log[10]~model,italic(P)-value),)) +
+  xlab(expression(italic(P)-value~threshold~(italic(P)[T])))
   ggfig.plot <- ggfig.plot + geom_text(aes(x = factor(high.res), y = r2.out, label = paste(print.p)), vjust = -1.5, hjust = 0, angle = 45, cex = 2.8, parse=T) +
-  scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  + 
-	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(), 
+  scale_y_continuous(limits = c(0, max(output$r2.out)*1.25))  +
+	          theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank(), panel.background = element_blank(),
           axis.line = element_line(colour = "black",size=0.5))
   if(binary.target){
-	ggfig.plot <- ggfig.plot + ylab(bquote(Variance~Explained:~Pseudo~R^2)) 
-  } 
+	ggfig.plot <- ggfig.plot + ylab(bquote(Variance~Explained:~Pseudo~R^2))
+  }
   if(binary.target){
-	ggfig.plot <- ggfig.plot + ylab(bquote(Variance~Explained:~R^2)) 
-  } 
+	ggfig.plot <- ggfig.plot + ylab(bquote(Variance~Explained:~R^2))
+  }
   ggfig.plot
-  ggsave(paste(figname,"_BARPLOT_", Sys.Date(), ".png", sep = ""))		
+  ggsave(paste(figname,"_BARPLOT_", Sys.Date(), ".png", sep = ""))
 }
 if(!ggfig){
         png(paste(figname,"_BARPLOT_", Sys.Date(), ".png", sep = ""))
        if(binary.target){
-       plot.fig  <- with(output, barplot(r2.out, 
+       plot.fig  <- with(output, barplot(r2.out,
          names = high.res,
-         main = "", 
+         main = "",
          col = "red",
          xlab = expression(italic(P)[T]),
          ylab = bquote(Pseudo~R^2),
          ylim = c(0,  max(output$r2.out)*1.25)  ))
           text( parse(text=paste(
-         output$print.p)), 
-         x = plot.fig+0.1, 
-        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+         output$print.p)),
+         x = plot.fig+0.1,
+        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
          srt = 45)
        }
        if(!binary.target){
-       plot.fig  <- with(output, barplot(r2.out, 
+       plot.fig  <- with(output, barplot(r2.out,
          names = high.res,
-         main = "", 
+         main = "",
          col = "red",
          xlab = expression(italic(P)[T]),
          ylab = expression(R^2),
          ylim = c(0,  max(output$r2.out)*1.25)  ))
           text( parse(text=paste(
-         output$print.p)), 
-         x = plot.fig+0.1, 
-        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)), 
+         output$print.p)),
+         x = plot.fig+0.1,
+        y =  output$r2.out+ (max(output$r2.out)*1.125-max(output$r2.out)),
          srt = 45)
        }
        dev.off()
@@ -3045,7 +3047,7 @@ if(cleanup){
 	system("rm base_snps", ignore.stdout=T,ignore.stderr=T)
 	system("rm LE_SNPs", ignore.stdout=T,ignore.stderr=T)
 }
-	
+
 
 }
 
@@ -3054,7 +3056,7 @@ if(print.time){
   cat(" ################################# \n # \n #   Print time \n # \n ################################# \n")
 }
 
-running.time <- proc.time()[3] - start.time 
+running.time <- proc.time()[3] - start.time
 if(running.time < 60){
 	out.run.time <- round(running.time, digits = 2)
 	out.time.units <- "seconds"
