@@ -56,7 +56,7 @@ boot2docker start
 ```
 
 ```{bash}
-docker pull compbio/prsice:1.2.1
+docker pull compbio/prsice:1.2
 ```
 
 ## Runnig PRSice
@@ -80,7 +80,7 @@ The Vignette: [PRSice_VIGNETTE_v1.2.pdf](https://github.com/KHP-Informatics/PRSi
 mkdir ${HOME}/pgrs
 cd ${HOME}/pgrs
 
-## run compbio/prsice:1.2.1
+## run compbio/prsice:1.2
 #
 docker run --rm=true \
   -v ${HOME}/pgrs:/home/pipeman \
@@ -90,8 +90,8 @@ docker run --rm=true \
   --user pipeman \
   --name prsice \
   -i \
-  -t compbio/prsice:1.2.1 /bin/bash -c \
-    "R -q --file=/usr/local/bin/PRSice_v1.2-multicore.R --args \
+  -t compbio/prsice:1.2 /bin/bash -c \
+    "R -q --file=/usr/local/bin/PRSice_v1.2.multicore.R --args \
     plink /usr/local/bin/plink1.9_x86_64 \
     base /usr/local/bin/TOY_BASE_GWAS.assoc \
     target /usr/local/bin/TOY_TARGET_DATA \
