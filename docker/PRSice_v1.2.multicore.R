@@ -21,7 +21,8 @@ base <-   NA
 
 ## preferable
 plink <-  NA
-ncpu <- 2 ## sjn addition . Added --threads option to plink calls. This is only for plink1.9
+## sjn addition . Added --threads option to plink calls. This is only for plink1.9
+ncpu <- 2
 order.cols <- "SNP,CHR,BP,A1,A2,OR,SE,P"
 supplied.order <- F
 
@@ -168,7 +169,7 @@ cat(" ################################# \n # \n #  Read in Command Line Argument
 
 
 parseCommandArgs(evaluate=T)
-
+ncpu <- ncpu
 supper <- supper+sinc
 slower <- slower - sinc
 covariates <- strsplit(covariates, split=",")[[1]]
